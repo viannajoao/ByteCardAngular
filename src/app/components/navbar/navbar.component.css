@@ -1,0 +1,76 @@
+.screenFlex{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+
+}
+
+.logo{
+  width: 100px;
+
+}
+
+.logo img{
+  width: 80px;
+}
+
+.screenFlex ol{
+  display: flex;
+  /* background-color: red; */
+
+}
+
+
+.screenFlex li{
+  padding: 10px;
+  list-style: none;
+  font-size: 22px;
+  margin-left: 30px;
+  cursor: pointer;
+}
+
+.navigation{
+  display: flex;
+  /* background-color: red; */
+  justify-content: center;
+  align-items: center;
+
+}
+
+.button{
+  padding: 18px;
+  border-radius: 50%;
+  margin: 10px;
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+
+.login{
+  padding: 15px;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background-color: brown;
+  color: #FFF;
+}
+
+
+/* ================================================================= */
+
+.navBar{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.spacer{
+  flex: 1 1 auto;
+}
+
+a{
+  color: #FFF;
+  text-decoration: none;
+  margin-right: 20px;
+}
