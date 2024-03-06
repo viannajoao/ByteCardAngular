@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError } from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Client } from '../models/Client';
 import { Credito } from '../models/Credito';
 

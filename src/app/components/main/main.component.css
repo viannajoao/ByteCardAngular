@@ -1,0 +1,56 @@
+.inputClient{
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.inputClient button{
+  margin-top: 20px;
+  margin-right: 70px;
+
+  cursor: pointer;
+}
+
+
+.title{
+  text-align: center;
+  margin-top: 40px;
+  margin-right: 550px;
+  font-size: 42px;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.search-container{
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.search-container button{
+  margin-left: 10px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.example-full-width{
+  width: 300px;
+  height: 70px;
+}
+
+
+.search-container input{
+  width: 100px;
+  cursor: pointer;
+}
+
+.container-form{
+  width: 100%;
+}
+
+table{
+  width: 100%;
+}

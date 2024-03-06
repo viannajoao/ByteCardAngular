@@ -1,1 +1,17 @@
-<p>cadastro works!</p>
+<div class="container-cadastro">
+  <h1>Cadastrar Cliente</h1>
+
+
+  <form class="container-form" (ngSubmit)="cadastrar()">
+
+    <input type="number" placeholder="CPF" name="cpf" [(ngModel)]="client.cpf">
+    <input type="text" placeholder="NOME" name="name"  [(ngModel)]="client.name">
+    <input type="text" placeholder="E-MAIL" name="email"  [(ngModel)]="client.email">
+    <input type="number" placeholder="TELEFONE" name="tel"  [(ngModel)]="client.tel">
+
+    <button type="submit" class="btn1" value="Cadastrar">Cadastrar</button>
+    <button routerLink="/" class="btn2">Cancelar</button>
+  </form>
+
+</div>
+

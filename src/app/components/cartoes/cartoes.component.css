@@ -1,0 +1,43 @@
+.inputClient{
+  display: flex;
+  flex-direction: row-reverse;
+
+}
+
+.inputClient button{
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+.inputClient h1{
+  margin-right: 740px;
+  margin-top: 20px;
+  font-size: 32px;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.search-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 90px;
+}
+
+.search-container button{
+  margin-left: 10px;
+}
+
+.example-full-width{
+  width: 300px;
+  height: 70px;
+
+}
+
+.search-container button{
+  margin-bottom: 20px;
+}
+
+table{
+  width: 100%;
+}

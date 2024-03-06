@@ -18,6 +18,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatTableModule} from '@angular/material/table';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +29,7 @@ import { CommonModule } from '@angular/common';
     NavbarComponent,
     MainComponent,
     CartoesComponent,
-    CadastroCartaoComponent
+    CadastroCartaoComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,9 @@ import { CommonModule } from '@angular/common';
     MatFormFieldModule,
     MatDividerModule,
     MatTableModule,
-    CommonModule
+    CommonModule,
+    HttpClientModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

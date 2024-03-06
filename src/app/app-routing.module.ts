@@ -6,17 +6,13 @@ import { CartoesComponent } from './components/cartoes/cartoes.component';
 import { CadastroCartaoComponent } from './components/cadastro-cartao/cadastro-cartao.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'main',
-    pathMatch: 'full'
-  },
+
   {
     path: 'cadastrar',
     component: CadastroComponent
   },
   {
-    path: 'main',
+    path: '',
     component: MainComponent
   },
   {
