@@ -6,6 +6,7 @@ import { Credito } from 'src/app/models/Credito';
 import { ClientService } from 'src/app/servico/client.service';
 
 import { Injectable } from '@angular/core';
+import { CreditoPut } from 'src/app/models/CreditoPut';
 
 
 @Component({
@@ -20,9 +21,10 @@ export class DialogDeleteCardComponent implements OnInit {
   item: Credito = new Credito();
   itemId: string = '';
 
-  constructor(private dialog: MatDialogRef<DialogDeleteCardComponent>, private service: ClientService, @Inject(MAT_DIALOG_DATA) public data: Client, private snackBar: MatSnackBar) {}
+  constructor(private dialog: MatDialogRef<DialogDeleteCardComponent>, private service: ClientService, @Inject(MAT_DIALOG_DATA) public data: CreditoPut, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
+    console.log(this.data.id)
     this.itemId = this.data.id; // Substitua pelo ID do item que você deseja atualizar
     this.service.getCreditById(this.itemId).subscribe(result => {
       this.item = result;
@@ -38,12 +40,7 @@ export class DialogDeleteCardComponent implements OnInit {
       console.log(result)
       this.onSucess()
       this.cancel()
-    //   setTimeout(() => {
 
-    //     this.refresh()
-
-
-    // }, 3000)
   }
   )}
 
@@ -58,8 +55,5 @@ export class DialogDeleteCardComponent implements OnInit {
     this.dialog.close();
   }
 
-  // refresh():void{
-  //   this.location.reload();
-  // }
 
 }

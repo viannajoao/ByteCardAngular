@@ -28,6 +28,9 @@ import { DialogDeleteCardComponent } from './components/dialog-delete-card/dialo
 import { DialogCardComponent } from './components/dialog-card/dialog-card.component';
 import { setTimeout } from 'timers';
 import { Location } from '@angular/common';
+import {MatCardModule} from '@angular/material/card';
+import { FaturaComponent } from './components/fatura/fatura.component';
+
 
 
 @NgModule({
@@ -42,6 +45,7 @@ import { Location } from '@angular/common';
     DialodDeleteComponent,
     DialogDeleteCardComponent,
     DialogCardComponent,
+    FaturaComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +64,7 @@ import { Location } from '@angular/common';
     MatSnackBarModule,
     MatDialogModule,
     MatSelectModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

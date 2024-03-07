@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Client } from 'src/app/models/Client';
+import { Credito } from 'src/app/models/Credito';
+import { CreditoPut } from 'src/app/models/CreditoPut';
+import { ClientService } from 'src/app/servico/client.service';
 
 @Component({
   selector: 'app-dialog-card',
@@ -7,9 +13,58 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DialogCardComponent implements OnInit {
 
-  constructor() { }
+  client: Client = new Client();
+  clients: Client[] = [ ];
+  item: CreditoPut = new CreditoPut();
+  itemId:string = '';
+
+  credit: Credito = new Credito();
+  credits: Credito[] = [ ];
+
+  creditPut: CreditoPut = new CreditoPut();
+  creditsPut: CreditoPut[] = [];
+
+  constructor(private service:ClientService, private dialog: MatDialogRef<DialogCardComponent>, @Inject(MAT_DIALOG_DATA) public data: CreditoPut, private snackBar: MatSnackBar) { }
+
+
 
   ngOnInit(): void {
+    this.itemId = this.data.id; // Substitua pelo ID do item que você deseja atualizar
+    this.service.getCreditPutById(this.itemId).subscribe(result => {
+      this.item = result;
+      // console.log(this.item)
+    });
+    // console.log(this.item)
+    // console.log(this.itemId)
   }
+
+
+  atualizar():void{
+    console.log(this.item)
+
+    this.item.limity = this.credit.limity
+
+    console.log(this.item)
+    this.service.updateCreditItem(this.item).subscribe(data => {
+      console.log(data)
+      this.onSucess()
+      this.client = new Client()
+      this.cancel()
+
+    })
+
+
+  }
+
+  onSucess():void{
+    this.snackBar.open("Limite do cliente modificado", '', {
+      duration: 3000
+    })
+  }
+
+  cancel():void{
+    this.dialog.close()
+  }
+
 
 }

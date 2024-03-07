@@ -5,6 +5,8 @@ import { Credito } from 'src/app/models/Credito';
 import { ClientService } from 'src/app/servico/client.service';
 import { DialogCardComponent } from '../dialog-card/dialog-card.component';
 import { DialogDeleteCardComponent } from '../dialog-delete-card/dialog-delete-card.component';
+import { CreditoPut } from 'src/app/models/CreditoPut';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-cartoes',
@@ -21,16 +23,19 @@ export class CartoesComponent implements OnInit {
   displayedColumns = [ 'numero' , 'cliente', 'limite', 'validade', 'actions'];
 
    credits:Credito[] = [];
-   creditsFiltered:Credito[] = [];
+   creditsFiltered:CreditoPut[] = [];
+    item: CreditoPut = new CreditoPut();
 
+  creditPut: CreditoPut = new CreditoPut();
+  creditsPut: CreditoPut[] = [];
 
   constructor(private service:ClientService, private dialog: MatDialog){}
 
   selecionarCard():void{
     this.service.selecionarCartoes()
     .subscribe( retorno => {
-      this.credits = retorno
-      this.creditsFiltered = this.credits
+      this.creditsPut = retorno
+      this.creditsFiltered = this.creditsPut
     })
   }
 
@@ -48,18 +53,19 @@ export class CartoesComponent implements OnInit {
 
 
   pesquisar() {
-    this.creditsFiltered = this.credits.filter(usuario =>
+    this.creditsFiltered = this.creditsPut.filter(usuario =>
       usuario.client.toLowerCase().includes(this.termoPesquisa.toLowerCase())
     );
   }
 
   openDialog(id:number){
-    this.credit = this.credits[id];
-    const editCredit = this.credit
-    console.log(editCredit);
+
+    this.creditPut = this.creditsPut[id];
+    const editCredit = this.creditPut
+    console.log(this.item);
     const dialogRef =  this.dialog.open(DialogCardComponent, {
       width: '900px',
-      data: {id: editCredit.id ,numCartao: editCredit.numCartao, validade: editCredit.validade, client: editCredit.client, cv: editCredit.cv}
+      data: {id: editCredit.id ,numCartao: editCredit.numCartao, validade: editCredit.validade, client: editCredit.client, cv: editCredit.cv, limity: editCredit.limity}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -68,12 +74,12 @@ export class CartoesComponent implements OnInit {
   }
 
   openDialogDelete(id:number){
-    this.credit = this.credits[id];
-    const editCredit = this.credit
+    this.creditPut = this.creditsPut[id];
+    const editCredit = this.creditPut
     console.log(editCredit);
     const dialogRef =  this.dialog.open(DialogDeleteCardComponent, {
       width: '500px',
-      data: {id: editCredit.id ,numCartao: editCredit.numCartao, validade: editCredit.validade, client: editCredit.client, cv: editCredit.cv}
+      data: {id: editCredit.id , client: editCredit.client,}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -82,9 +88,11 @@ export class CartoesComponent implements OnInit {
   }
 
   ngOnInit():void{
+
     this.selecionarCard();
     console.log(this.credits)
   }
+
 
 
 }

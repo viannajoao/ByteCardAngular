@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Client } from '../models/Client';
 import { Credito } from '../models/Credito';
+import { CreditoPut } from '../models/CreditoPut';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,8 @@ export class ClientService {
       return this.http.get<Client[]>(this.url)
   }
 
-  selecionarCartoes():Observable<Credito[]>{
-    return this.http.get<Credito[]>(this.urlCartoes)
+  selecionarCartoes():Observable<CreditoPut[]>{
+    return this.http.get<CreditoPut[]>(this.urlCartoes)
   }
 
   selecionarClientes():Observable<Client[]>{
@@ -36,6 +37,10 @@ export class ClientService {
 
   getCreditById(id: string): Observable<Credito> {
     return this.http.get<Credito>(`${this.urlCartoes}/${id}`);
+  }
+
+  getCreditPutById(id: string): Observable<CreditoPut> {
+    return this.http.get<CreditoPut>(`${this.urlCartoes}/${id}`);
   }
 
   // ======================= POST ================================ //
@@ -57,6 +62,9 @@ updateItem(item: any): Observable<any> {
   return this.http.put<any>(`${this.url}/${item.id}`, item);
 }
 
+updateCreditItem(item: any): Observable<CreditoPut> {
+  return this.http.put<CreditoPut>(`${this.urlCartoes}/${item.id}`, item);
+}
 // ================================= DELETE ========================= //
 
 deleteItem(item: any): Observable<any> {

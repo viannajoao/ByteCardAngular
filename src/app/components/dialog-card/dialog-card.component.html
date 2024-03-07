@@ -1,1 +1,19 @@
-<p>dialog-card works!</p>
+<h1>Alterar Limite</h1>
+
+<form class="container-form" (ngSubmit)="atualizar()">
+  <mat-card>
+      <p><b>NUMERO:  </b>{{data.numCartao}}</p>
+      <p><b>CLIENTE:  </b>{{data.client}}</p>
+      <p><b>LIMITE:  </b>{{data.limity}}</p>
+      <p><b>VALIDADE:  </b>{{data.validade}}</p>
+  </mat-card>
+
+  <!-- {{data.numCartao}}
+  {{data.validade}} -->
+
+  <mat-form-field>
+    <mat-label>Limite</mat-label>
+  <input matInput type="text" [value]="data.limity" placeholder="Ex. 1500" name="limty"  [(ngModel)]="credit.limity">
+  </mat-form-field>
+
+</form>

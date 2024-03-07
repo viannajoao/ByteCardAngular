@@ -4,6 +4,7 @@ import { CadastroComponent } from './components/cadastro/cadastro.component';
 import { MainComponent } from './components/main/main.component';
 import { CartoesComponent } from './components/cartoes/cartoes.component';
 import { CadastroCartaoComponent } from './components/cadastro-cartao/cadastro-cartao.component';
+import { FaturaComponent } from './components/fatura/fatura.component';
 
 const routes: Routes = [
 
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'cartoes/cadastrarCartao',
     component: CadastroCartaoComponent
+  },
+  {
+    path: 'cartoes/faturas',
+    component: FaturaComponent
   },
 ];
 
