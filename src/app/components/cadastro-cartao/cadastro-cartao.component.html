@@ -1,16 +1,25 @@
-<form class="container-form" (ngSubmit)="cadastrar()" >
-
+<div class="container-cadastro">
   <h1>Cadastramento de Cartão</h1>
 
-  <!--<label for="clientes">Escolha um Cliente</label> -->
-  <div class="grid">
-  <select [(ngModel)]="credit.client" name="client" >
-    <option *ngFor="let c of clients" name="client">{{c.name}}</option>
-  </select>
-  <input matInput type="number"  placeholder="Limite" required name="limity" [(ngModel)]="credit.limity">
-</div>
-<div class="buttons">
-  <button type="submit" value="cadastrar" mat-raised-button color="primary">Cadastrar</button>
-  <button mat-raised-button color="warn" routerLink="credito">Cancelar</button>
-</div>
+<form class="container-form" (ngSubmit)="cadastrar()" >
+
+  <mat-form-field appearance="outline">
+    <mat-label>Clientes</mat-label>
+    <mat-select name="client" [(ngModel)]="credit.client">
+      <mat-option *ngFor="let c of clients" [value]="c.name" >
+        {{c.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Limite</mat-label>
+    <input matInput type="number"  placeholder="Ex. 1500"  name="limity" [(ngModel)]="credit.limity">
+  </mat-form-field>
+
+  <button type="submit" value="cadastrar" class="btn1" mat-raised-button color="primary">Cadastrar</button>
+  <button mat-raised-button color="warn" class="btn2" routerLink="/credito">Cancelar</button>
+
 </form>
+
+</div>

@@ -1,0 +1,26 @@
+/* .delete-form{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+}
+
+.delete-form button{
+  margin-left: 10px;
+} */
+
+form{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h2{
+  text-align: center;
+}
+
+.btn1{
+  margin-right: 10px;
+}

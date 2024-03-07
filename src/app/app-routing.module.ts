@@ -16,11 +16,11 @@ const routes: Routes = [
     component: MainComponent
   },
   {
-    path: 'credito',
+    path: 'cartoes',
     component: CartoesComponent
   },
   {
-    path: 'credito/cadastrarCartao',
+    path: 'cartoes/cadastrarCartao',
     component: CadastroCartaoComponent
   },
 ];

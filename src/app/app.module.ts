@@ -22,6 +22,12 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogClientComponent } from './components/dialog-client/dialog-client.component';
+import { DialodDeleteComponent } from './components/dialod-delete/dialod-delete.component';
+import {MatSelectModule} from '@angular/material/select';
+import { DialogDeleteCardComponent } from './components/dialog-delete-card/dialog-delete-card.component';
+import { DialogCardComponent } from './components/dialog-card/dialog-card.component';
+import { setTimeout } from 'timers';
+import { Location } from '@angular/common';
 
 
 @NgModule({
@@ -33,6 +39,9 @@ import { DialogClientComponent } from './components/dialog-client/dialog-client.
     CartoesComponent,
     CadastroCartaoComponent,
     DialogClientComponent,
+    DialodDeleteComponent,
+    DialogDeleteCardComponent,
+    DialogCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +58,8 @@ import { DialogClientComponent } from './components/dialog-client/dialog-client.
     CommonModule,
     HttpClientModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

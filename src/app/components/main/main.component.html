@@ -43,7 +43,7 @@
       <th mat-header-cell *matHeaderCellDef> AÇÕES </th>
       <td mat-cell *matCellDef="let c; index as i">
         <button mat-raised-button (click)="openDialog(i)">Alterar</button>
-        <button mat-raised-button color="accent">excluir</button>
+        <button mat-raised-button (click)="openDialogDelete(i)" color="accent">excluir</button>
       </td>
     </ng-container>
 

@@ -4,6 +4,7 @@ import { Client } from 'src/app/models/Client';
 import { ClientService } from 'src/app/servico/client.service';
 import { CadastroComponent } from '../cadastro/cadastro.component';
 import { DialogClientComponent } from '../dialog-client/dialog-client.component';
+import { DialodDeleteComponent } from '../dialod-delete/dialod-delete.component';
 
 @Component({
   selector: 'app-main',
@@ -43,9 +44,6 @@ export class MainComponent implements OnInit {
     );
   }
 
-  selecionarClient(id:number):void{
-
-  }
 
   openDialog(id:number){
     this.client = this.clients[id];
@@ -53,6 +51,20 @@ export class MainComponent implements OnInit {
     console.log(editClient);
     const dialogRef =  this.dialog.open(DialogClientComponent, {
       width: '900px',
+      data: {id: editClient.id ,cpf: editClient.cpf, name: editClient.name, email: editClient.email, tel: editClient.tel}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+    })
+  }
+
+  openDialogDelete(id:number){
+    this.client = this.clients[id];
+    const editClient = this.client
+    console.log(editClient);
+    const dialogRef =  this.dialog.open(DialodDeleteComponent, {
+      width: '500px',
       data: {id: editClient.id ,cpf: editClient.cpf, name: editClient.name, email: editClient.email, tel: editClient.tel}
     });
 

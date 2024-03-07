@@ -27,6 +27,8 @@ export class CadastroCartaoComponent implements OnInit {
   }
 
   cadastrar():void{
+    if(this.credit.limity && this.credit.client != ''){
+
     this.credit.limity.toString()
     this.servico.cadastrarCard(this.credit).subscribe(retorno => {
       this.credits.push(retorno)
@@ -35,7 +37,10 @@ export class CadastroCartaoComponent implements OnInit {
     }, err => {
       this.onError();
     })
-
+  }else{
+    this.onLimity()
+  }
+  console.log(this.client.name)
     console.log(this.credit)
   }
 
@@ -47,6 +52,12 @@ export class CadastroCartaoComponent implements OnInit {
 
   onError():void{
     this.snackBar.open("Erro ao cadastrar", '', {
+      duration: 3000
+    })
+  }
+
+  onLimity():void{
+    this.snackBar.open("Preencha o campo limite para proceguir corretamente", '', {
       duration: 3000
     })
   }

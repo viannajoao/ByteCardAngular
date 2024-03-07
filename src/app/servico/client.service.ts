@@ -34,6 +34,10 @@ export class ClientService {
     return this.http.get<Client>(`${this.url}/${id}`);
   }
 
+  getCreditById(id: string): Observable<Credito> {
+    return this.http.get<Credito>(`${this.urlCartoes}/${id}`);
+  }
+
   // ======================= POST ================================ //
 
 
@@ -52,6 +56,17 @@ export class ClientService {
 updateItem(item: any): Observable<any> {
   return this.http.put<any>(`${this.url}/${item.id}`, item);
 }
+
+// ================================= DELETE ========================= //
+
+deleteItem(item: any): Observable<any> {
+  return this.http.delete<any>(`${this.url}/${item.id}`, item);
+}
+
+deleteCreditItem(item: any): Observable<any> {
+  return this.http.delete<any>(`${this.urlCartoes}/${item.id}`, item);
+}
+
 
 
 
