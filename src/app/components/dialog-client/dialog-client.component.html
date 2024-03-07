@@ -1,0 +1,30 @@
+<div class="container-cadastro">
+  <h1>Atualizar cliente</h1>
+
+
+  <form class="container-form" (ngSubmit)="atualizar()">
+
+    <mat-form-field >
+      <mat-label>CPF</mat-label>
+        <input matInput type="number" [value]="data.cpf" placeholder="227398996119" name="cpf" [(ngModel)]="client.cpf">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Nome</mat-label>
+    <input matInput type="text" [value]="data.name" placeholder="Jasmini" name="name"  [(ngModel)]="client.name">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>E-mail</mat-label>
+    <input matInput type="text" [value]="data.email" placeholder="usuario@gmail.com" name="email"  [(ngModel)]="client.email">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Telefone</mat-label>
+      <input matInput type="number" [value]="data.tel" placeholder="(11)98765-3379" name="tel"  [(ngModel)]="client.tel">
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" class="btn1" value="Cadastrar">Atualizar</button>
+    <button mat-raised-button color="warn" routerLink="/" class="btn2" (click)="cancel()">Cancelar</button>
+  </form>
+
+</div>

@@ -20,7 +20,7 @@ export class CadastroComponent  {
   cadastrar(): void {
 
 
-    //this.client.cpf.toString();
+    this.client.cpf = Number(this.client.cpf).toString().padStart(11, '0');
     this.client.tel.toString();
 
 
@@ -34,9 +34,11 @@ export class CadastroComponent  {
           error => {
             if (error.status === 400) {
               this.onCpf();
+              console.log(this.client)
             } else if(error.status === 200) {
               this.onSuccess()
               this.client = new Client()
+              console.log(this.client)
             }else{
               console.error('Erro ao cadastrar cliente:', error);
               this.onErro();
@@ -66,8 +68,6 @@ export class CadastroComponent  {
       });
     }
 
-    validarCampos(): boolean {
-      return !!this.client.cpf && !!this.client.tel && !!this.client.name && !!this.client.email;
-    }
+
   }
 

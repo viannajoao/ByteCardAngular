@@ -20,6 +20,8 @@ import {MatTableModule} from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogClientComponent } from './components/dialog-client/dialog-client.component';
 
 
 @NgModule({
@@ -30,6 +32,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MainComponent,
     CartoesComponent,
     CadastroCartaoComponent,
+    DialogClientComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatTableModule,
     CommonModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

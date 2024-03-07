@@ -7,7 +7,7 @@
   <form class="example-form" (ngSubmit)="pesquisar()">
     <mat-form-field  t-form-field class="example-full-width">
       <mat-label>Cliente</mat-label>
-      <input matInput placeholder="Ex. João" value="Dennis"  name="clientSearch" >
+      <input matInput placeholder="Ex. João" value="Dennis" [(ngModel)]="clientSearch" name="clientSearch" >
     </mat-form-field>
     <button mat-raised-button type="submit">Pesquisar</button>
 </form>
@@ -37,6 +37,14 @@
     <ng-container matColumnDef="tel">
       <th mat-header-cell *matHeaderCellDef> TELEFONE </th>
       <td mat-cell *matCellDef="let c"> {{c.tel}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> AÇÕES </th>
+      <td mat-cell *matCellDef="let c; index as i">
+        <button mat-raised-button (click)="openDialog(i)">Alterar</button>
+        <button mat-raised-button color="accent">excluir</button>
+      </td>
     </ng-container>
 
 

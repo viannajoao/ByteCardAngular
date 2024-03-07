@@ -16,6 +16,8 @@ export class ClientService {
 
   constructor(private http:HttpClient) { }
 
+  //============================ GET ============================= //
+
   selecionar():Observable<Client[]>{
       return this.http.get<Client[]>(this.url)
   }
@@ -28,6 +30,13 @@ export class ClientService {
     return this.http.get<Client[]>(this.url)
   }
 
+  getItemById(id: string): Observable<Client> {
+    return this.http.get<Client>(`${this.url}/${id}`);
+  }
+
+  // ======================= POST ================================ //
+
+
   cadastrar(obj:Client):Observable<Client>{
     return this.http.post<Client>(this.urlPost, obj)
 
@@ -36,6 +45,16 @@ export class ClientService {
   cadastrarCard(obj:Credito):Observable<Credito>{
     return this.http.post<Credito>(this.urlPostCard, obj)
   }
+
+
+// ================================= PUT ========================= //
+
+updateItem(item: any): Observable<any> {
+  return this.http.put<any>(`${this.url}/${item.id}`, item);
+}
+
+
+
 }
 
 

@@ -1,1 +1,16 @@
-<p>cadastro-cartao works!</p>
+<form class="container-form" (ngSubmit)="cadastrar()" >
+
+  <h1>Cadastramento de Cartão</h1>
+
+  <!--<label for="clientes">Escolha um Cliente</label> -->
+  <div class="grid">
+  <select [(ngModel)]="credit.client" name="client" >
+    <option *ngFor="let c of clients" name="client">{{c.name}}</option>
+  </select>
+  <input matInput type="number"  placeholder="Limite" required name="limity" [(ngModel)]="credit.limity">
+</div>
+<div class="buttons">
+  <button type="submit" value="cadastrar" mat-raised-button color="primary">Cadastrar</button>
+  <button mat-raised-button color="warn" routerLink="credito">Cancelar</button>
+</div>
+</form>

@@ -14,7 +14,7 @@ export class CartoesComponent implements OnInit {
   clients:Client[] = [];
   clientsFiltered: Client[] = [];
   termoPesquisa: string = "";
-   displayedColumns = [ 'numero' , 'cliente', 'limite', 'validade'];
+  displayedColumns = [ 'numero' , 'cliente', 'limite', 'validade', 'actions'];
 
    credits:Credito[] = [];
    creditsFiltered:Credito[] = [];
