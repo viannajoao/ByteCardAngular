@@ -7,6 +7,8 @@ import { DialogCardComponent } from '../dialog-card/dialog-card.component';
 import { DialogDeleteCardComponent } from '../dialog-delete-card/dialog-delete-card.component';
 import { CreditoPut } from 'src/app/models/CreditoPut';
 import { Location } from '@angular/common';
+import { FaturaComponent } from '../fatura/fatura.component';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-cartoes',
@@ -29,7 +31,9 @@ export class CartoesComponent implements OnInit {
   creditPut: CreditoPut = new CreditoPut();
   creditsPut: CreditoPut[] = [];
 
-  constructor(private service:ClientService, private dialog: MatDialog){}
+  dadosSelect: CreditoPut = new CreditoPut();
+
+  constructor(private service:ClientService, private dialog: MatDialog, private router: Router){}
 
   selecionarCard():void{
     this.service.selecionarCartoes()
@@ -85,6 +89,32 @@ export class CartoesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
     })
+  }
+
+  // openDialogFatura(id:number){
+
+  //   this.creditPut = this.creditsPut[id];
+  //   const editCredit = this.creditPut
+  //   console.log(this.item);
+  //   const dialogRef =  this.dialog.open(FaturaComponent, {
+  //     width: '1000px',
+  //     data: {id: editCredit.id ,numCartao: editCredit.numCartao, validade: editCredit.validade, client: editCredit.client, cv: editCredit.cv, limity: editCredit.limity}
+  //   });
+
+  //   dialogRef.afterClosed().subscribe(result => {
+
+  //   })
+  // }
+
+  fatura(dados:number) {
+    this.creditPut = this.creditsPut[dados];
+    this.dadosSelect = this.creditPut;
+    console.log(this.dadosSelect);
+    this.router.navigate(['cartoes', 'faturas', this.dadosSelect.id]);
+
+    // this.router.navigate({ path: 'cartoes/faturas/:id', component: this.dadosSelect })
+
+    // this.router.navigate(['cartoes/faturas', component:this.dadosSelect.id]);
   }
 
   ngOnInit():void{

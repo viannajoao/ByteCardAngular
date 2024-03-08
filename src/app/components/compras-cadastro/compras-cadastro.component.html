@@ -1,0 +1,39 @@
+<div class="container-buy">
+<h1>Cadastrar compras</h1>
+
+<form class="container-form" (ngSubmit)="cadastrar()">
+
+<mat-form-field appearance="outline">
+  <mat-label>Clientes</mat-label>
+  <mat-select name="numCartao" [(ngModel)]="buy.numCartao">
+    <mat-option *ngFor="let c of creditsPut" [value]="c.numCartao" >
+      {{c.numCartao}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="outline">
+  <mat-label>Valor</mat-label>
+  <input matInput type="number"  placeholder="Ex. 120,90"  name="valor" [(ngModel)]="buy.valor">
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label>Cars</mat-label>
+  <select matNativeControl required name="categoria" [(ngModel)]="buy.categoria">
+    <option value="Lazer">Lazer</option>
+    <option value="Alimetacao">Alimentação</option>
+    <option value="saude">Saúde</option>
+    <option value="viagem">Viagem</option>
+  </select>
+</mat-form-field>
+
+<mat-form-field appearance="outline">
+  <mat-label>Estabelecimento</mat-label>
+  <input matInput type="text"  placeholder="Ex. 1500"  name="estabelecimento" [(ngModel)]="buy.estabelecimento">
+</mat-form-field>
+
+<button type="submit" value="cadastrar" class="btn1" mat-raised-button color="primary">Cadastrar</button>
+<button mat-raised-button color="warn" class="btn2" routerLink="/compras">Cancelar</button>
+</form>
+
+</div>

@@ -30,6 +30,9 @@ import { setTimeout } from 'timers';
 import { Location } from '@angular/common';
 import {MatCardModule} from '@angular/material/card';
 import { FaturaComponent } from './components/fatura/fatura.component';
+import { ComprasComponent } from './components/compras/compras.component';
+import { ComprasCadastroComponent } from './components/compras-cadastro/compras-cadastro.component';
+import { ComprasRelatorioComponent } from './components/compras-relatorio/compras-relatorio.component';
 
 
 
@@ -46,6 +49,9 @@ import { FaturaComponent } from './components/fatura/fatura.component';
     DialogDeleteCardComponent,
     DialogCardComponent,
     FaturaComponent,
+    ComprasComponent,
+    ComprasCadastroComponent,
+    ComprasRelatorioComponent,
   ],
   imports: [
     BrowserModule,

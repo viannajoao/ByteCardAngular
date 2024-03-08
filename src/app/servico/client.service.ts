@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Client } from '../models/Client';
 import { Credito } from '../models/Credito';
 import { CreditoPut } from '../models/CreditoPut';
+import { Compras } from '../models/Compras';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,9 @@ export class ClientService {
   private urlPost:string = 'http://localhost:8080/cadastrar';
   private urlCartoes:string = 'http://localhost:8080/cartoes';
   private urlPostCard:string = 'http://localhost:8080/cadastrarCartoes';
+  private urlPostBuy:string = 'http://localhost:8080/compras/cadastrarCompras';
+  private urlFatura:string = 'http://localhost:8080/cartoes/faturas'
+
 
   constructor(private http:HttpClient) { }
 
@@ -43,6 +47,10 @@ export class ClientService {
     return this.http.get<CreditoPut>(`${this.urlCartoes}/${id}`);
   }
 
+  getCreditByCard(card: string): Observable<Compras>{
+    return this.http.get<Compras>(`${this.urlFatura}/${card}`);
+  }
+
   // ======================= POST ================================ //
 
 
@@ -53,6 +61,10 @@ export class ClientService {
 
   cadastrarCard(obj:Credito):Observable<Credito>{
     return this.http.post<Credito>(this.urlPostCard, obj)
+  }
+
+  cadastrarBuy(obj:Compras):Observable<Compras>{
+    return this.http.post<Compras>(this.urlPostBuy, obj)
   }
 
 

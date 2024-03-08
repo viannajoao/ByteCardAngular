@@ -45,7 +45,7 @@
       <td mat-cell *matCellDef="let c; index as i">
         <button mat-raised-button (click)="openDialog(i)">Alterar</button>
         <button mat-raised-button (click)="openDialogDelete(i)" color="accent">excluir</button>
-        <button mat-raised-button color="primary" routerLink="/cartoes/faturas">Ver fatura</button>
+        <button mat-raised-button color="primary" (click)="fatura(i)">Ver fatura</button>
       </td>
     </ng-container>
 
