@@ -1,0 +1,46 @@
+UPDATE compras
+SET horario = '2024-02-11 14:38:26.716252'
+WHERE id = unhex('af35d03ca6e7451f978492bf3c2f1097');
+
+UPDATE compras
+SET categoria = 'Lazer'
+WHERE id = '02d11931-5c8a-4edb-a8d0-4ce2a57daaef';
+
+SELECT c.id AS cliente_id, c.name AS nome_cliente, COUNT(*) AS total_compras, co. AS horario
+FROM clients c
+JOIN cartoes ca ON c.id = ca.cliente_id
+JOIN compras co ON ca.id = co.credito_id
+GROUP BY c.id, c.name
+ORDER BY total_compras DESC;
+
+SELECT c.id AS cliente_id, c.name AS nome_cliente, MAX(co.valor) AS maior_valor_compra
+FROM clients c
+JOIN cartoes ca ON c.id = ca.cliente_id
+JOIN compras co ON ca.id = co.credito_id
+GROUP BY c.id, c.name
+ORDER BY maior_valor_compra DESC;
+
+SELECT c.id AS cliente_id, c.name AS nome_cliente
+FROM clients c
+LEFT JOIN cartoes ca ON c.id = ca.cliente_id
+LEFT JOIN compras co ON ca.id = co.credito_id
+WHERE co.id IS NULL
+GROUP BY c.id, c.name;
+
+
+
+select * from clients;
+select * from compras;
+select * from cartoes;
+
+SELECT HEX(id) AS '550e8400-e29b-41d4-a716-446655440000'
+ FROM compras;
+
+
+ALTER TABLE compras
+MODIFY id BINARY(16);
+
+
+INSERT INTO compras(id, cartao, categoria, horario, estabelecimento, valor)VALUES(
+ 'ce8253fd-3097-4f84-bade-e9b0013a6f61', '0790383333806549', 'Lazer', '10/02/2024 10:32', 'StarBucks', '80'
+);

@@ -1,0 +1,43 @@
+.tabelas-clients{
+  margin-top: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+table{
+  width: 500px;
+}
+
+#compras{
+  text-align: center;
+  font-size: 22px;
+  background-color: rgb(59, 59, 252);
+  color: #FFF;
+}
+
+#gasto{
+  text-align: center;
+  font-size: 22px;
+  background-color: green;
+  color: #FFF;
+}
+
+#notBuy{
+  text-align: center;
+  font-size: 22px;
+  background-color: rgb(250, 39, 39);
+  color: #FFF;
+}
+
+b{
+  margin-right: 30px;
+}
+
+td{
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}

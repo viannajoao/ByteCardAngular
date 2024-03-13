@@ -7,6 +7,8 @@ import { CadastroCartaoComponent } from './components/cadastro-cartao/cadastro-c
 import { FaturaComponent } from './components/fatura/fatura.component';
 import { ComprasComponent } from './components/compras/compras.component';
 import { ComprasCadastroComponent } from './components/compras-cadastro/compras-cadastro.component';
+import { RelatorioGastoComponent } from './components/relatorio-gasto/relatorio-gasto.component';
+import { RelatorioComponent } from './components/relatorio/relatorio.component';
 
 const routes: Routes = [
 
@@ -37,6 +39,14 @@ const routes: Routes = [
   {
     path: 'compras/cadastrarCompras',
     component: ComprasCadastroComponent
+  },
+  {
+    path: 'compras/relatorioGastos',
+    component: RelatorioGastoComponent
+  },
+  {
+    path: 'relatorios',
+    component: RelatorioComponent
   },
 ];
 

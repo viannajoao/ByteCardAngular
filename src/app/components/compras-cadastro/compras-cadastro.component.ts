@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Client } from 'src/app/models/Client';
 import { Compras } from 'src/app/models/Compras';
+import { Credito } from 'src/app/models/Credito';
 import { CreditoPut } from 'src/app/models/CreditoPut';
 import { ClientService } from 'src/app/servico/client.service';
 
@@ -16,6 +17,7 @@ export class ComprasCadastroComponent implements OnInit {
   creditsPut:CreditoPut[] = [];
   buy:Compras = new Compras();
   buys:Compras[] = [];
+  selectCredit: CreditoPut = new CreditoPut();
 
   constructor(private service:ClientService, private snackBar: MatSnackBar) { }
 
@@ -30,9 +32,12 @@ export class ComprasCadastroComponent implements OnInit {
   }
 
   cadastrar():void{
+    this.buy.cartao = this.selectCredit.numCartao
+    this.buy.credits_id = this.selectCredit
     this.service.cadastrarBuy(this.buy).subscribe(retorno => {
       this.buys.push(retorno)
       this.onSucess();
+      console.log(this.buys)
       this.buy = new Compras();
     }, err => {
       this.onError();

@@ -37,7 +37,7 @@ export class MainComponent implements OnInit {
     )
   }
 
-  pesquisar() {
+  pesquisar():void {
     console.log(this.clientsFiltered)
     this.clientsFiltered = this.clients.filter(usuario =>
       usuario.name.toLowerCase().includes(this.clientSearch.toLowerCase())

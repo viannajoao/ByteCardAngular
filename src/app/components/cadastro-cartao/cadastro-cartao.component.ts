@@ -13,6 +13,7 @@ export class CadastroCartaoComponent implements OnInit {
 
   client = new Client();
   credit = new Credito();
+  selectClient: Client = new Client();
 
   clients:Client[] = [];
   credits:Credito[] = [];
@@ -27,12 +28,16 @@ export class CadastroCartaoComponent implements OnInit {
   }
 
   cadastrar():void{
+    console.log(this.selectClient)
+    this.credit.clients_id = this.selectClient
+    this.credit.client = this.selectClient.name
     if(this.credit.limity && this.credit.client != ''){
 
     this.credit.limity.toString()
     this.servico.cadastrarCard(this.credit).subscribe(retorno => {
       this.credits.push(retorno)
       this.onSucess();
+      console.log(retorno)
       this.credit = new Credito()
     }, err => {
       this.onError();

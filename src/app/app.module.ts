@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatDividerModule} from '@angular/material/divider';
@@ -26,13 +26,22 @@ import { DialodDeleteComponent } from './components/dialod-delete/dialod-delete.
 import {MatSelectModule} from '@angular/material/select';
 import { DialogDeleteCardComponent } from './components/dialog-delete-card/dialog-delete-card.component';
 import { DialogCardComponent } from './components/dialog-card/dialog-card.component';
-import { setTimeout } from 'timers';
-import { Location } from '@angular/common';
 import {MatCardModule} from '@angular/material/card';
 import { FaturaComponent } from './components/fatura/fatura.component';
 import { ComprasComponent } from './components/compras/compras.component';
 import { ComprasCadastroComponent } from './components/compras-cadastro/compras-cadastro.component';
 import { ComprasRelatorioComponent } from './components/compras-relatorio/compras-relatorio.component';
+import { StyleButtonComponent } from './components/style-button/style-button.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { RelatorioGastoComponent } from './components/relatorio-gasto/relatorio-gasto.component';
+import { RelatorioComponent } from './components/relatorio/relatorio.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { PoModule } from '@po-ui/ng-components';
+import { PoTemplatesModule } from '@po-ui/ng-templates';
+
+
+
+
 
 
 
@@ -52,6 +61,9 @@ import { ComprasRelatorioComponent } from './components/compras-relatorio/compra
     ComprasComponent,
     ComprasCadastroComponent,
     ComprasRelatorioComponent,
+    StyleButtonComponent,
+    RelatorioGastoComponent,
+    RelatorioComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,7 +82,12 @@ import { ComprasRelatorioComponent } from './components/compras-relatorio/compra
     MatSnackBarModule,
     MatDialogModule,
     MatSelectModule,
-    MatCardModule
+    MatCardModule,
+    MatDatepickerModule,
+    MatTabsModule,
+    PoModule,
+    RouterModule.forRoot([]),
+    PoTemplatesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

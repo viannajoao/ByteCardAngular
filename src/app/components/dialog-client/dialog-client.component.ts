@@ -38,14 +38,32 @@ export class DialogClientComponent implements OnInit {
     this.item.name = this.client.name
     this.item.email = this.client.email
     this.item.tel = this.client.tel
-    console.log(this.item)
-    this.service.updateItem(this.item).subscribe(data => {
-      console.log(data)
-      this.onSucess()
-      this.client = new Client()
 
+    if (this.client.cpf && this.client.tel && this.client.name && this.client.email != '') {
+      this.service.updateItem(this.item).subscribe(
+        () => {
+          this.onSucess();
+          this.client = new Client();
+          console.log('Cliente cadastrado com sucesso');
+        },
+        error => {
+          if (error.status === 400) {
+            this.onCpf();
+            console.log(this.client)
+          } else if(error.status === 200) {
+            this.onSucess()
+            this.client = new Client()
+            console.log(this.client)
+          }else{
+            console.error('Erro ao cadastrar cliente:', error);
+            this.onErro();
+          }
+        }
+      );
+    } else {
+      this.onErro();
+    }
 
-    })
 
 
   }
@@ -59,6 +77,20 @@ export class DialogClientComponent implements OnInit {
   cancel():void{
     this.dialog.close()
   }
+
+
+  onErro() {
+    this.snackBar.open('Preencha todos os campos para efetuar o cadastro corretamente', '', {
+      duration: 5000
+    });
+  }
+
+  onCpf() {
+    this.snackBar.open('CPF inválido ou E-mail já cadastrado', '', {
+      duration: 3000
+    });
+  }
+
 
 
 

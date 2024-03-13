@@ -5,8 +5,8 @@
 
   <mat-form-field appearance="outline">
     <mat-label>Clientes</mat-label>
-    <mat-select name="client" [(ngModel)]="credit.client">
-      <mat-option *ngFor="let c of clients" [value]="c.name" >
+    <mat-select name="client" [(ngModel)]="selectClient">
+      <mat-option *ngFor="let c of clients" [value]="c" >
         {{c.name}}
       </mat-option>
     </mat-select>
@@ -18,7 +18,7 @@
   </mat-form-field>
 
   <button type="submit" value="cadastrar" class="btn1" mat-raised-button color="primary">Cadastrar</button>
-  <button mat-raised-button color="warn" class="btn2" routerLink="/credito">Cancelar</button>
+  <button mat-raised-button color="warn" class="btn2" routerLink="/cartoes">Cancelar</button>
 
 </form>
 

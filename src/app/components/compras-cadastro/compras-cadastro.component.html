@@ -5,9 +5,9 @@
 
 <mat-form-field appearance="outline">
   <mat-label>Clientes</mat-label>
-  <mat-select name="numCartao" [(ngModel)]="buy.numCartao">
-    <mat-option *ngFor="let c of creditsPut" [value]="c.numCartao" >
-      {{c.numCartao}}
+  <mat-select name="numCartao" [(ngModel)]="selectCredit">
+    <mat-option *ngFor="let c of creditsPut" [value]="c" >
+      {{"cartão: " + c.numCartao + "   - cliente: " + c.client}}
     </mat-option>
   </mat-select>
 </mat-form-field>
@@ -33,7 +33,7 @@
 </mat-form-field>
 
 <button type="submit" value="cadastrar" class="btn1" mat-raised-button color="primary">Cadastrar</button>
-<button mat-raised-button color="warn" class="btn2" routerLink="/compras">Cancelar</button>
+<button mat-raised-button color="warn" class="btn2" routerLink="/">Cancelar</button>
 </form>
 
 </div>

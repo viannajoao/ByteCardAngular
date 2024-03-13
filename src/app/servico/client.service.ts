@@ -17,6 +17,9 @@ export class ClientService {
   private urlPostCard:string = 'http://localhost:8080/cadastrarCartoes';
   private urlPostBuy:string = 'http://localhost:8080/compras/cadastrarCompras';
   private urlFatura:string = 'http://localhost:8080/cartoes/faturas'
+  private urlRelatorio:string = 'http://localhost:8080/relatorios';
+  private urlRelatoioGastos: string = 'http://localhost:8080/relatorios/maisgastaram';
+  private urlRelatorioNotBuy:string = 'http://localhost:8080/relatorios/clientsNotBuy'
 
 
   constructor(private http:HttpClient) { }
@@ -47,8 +50,20 @@ export class ClientService {
     return this.http.get<CreditoPut>(`${this.urlCartoes}/${id}`);
   }
 
-  getCreditByCard(card: string): Observable<Compras>{
-    return this.http.get<Compras>(`${this.urlFatura}/${card}`);
+  getCreditByCard(card: string): Observable<Compras[]>{
+    return this.http.get<Compras[]>(`${this.urlFatura}/${card}`);
+  }
+
+  getClientsByCompras(): Observable<any[]>{
+    return this.http.get<any[]>(`${this.urlRelatorio}`);
+  }
+
+  getClientsMaisGastaram(): Observable<any[]>{
+    return this.http.get<any[]>(`${this.urlRelatoioGastos}`)
+  }
+
+  getClientsNotBuy(): Observable<any[]>{
+    return this.http.get<any[]>(`${this.urlRelatorioNotBuy}`); //
   }
 
   // ======================= POST ================================ //

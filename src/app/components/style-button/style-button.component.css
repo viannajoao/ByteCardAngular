@@ -1,0 +1,11 @@
+/* button{
+  margin-right: 20px;
+
+} */
+
+mat-card{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}

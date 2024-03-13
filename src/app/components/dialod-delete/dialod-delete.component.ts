@@ -33,7 +33,7 @@ export class DialodDeleteComponent implements OnInit {
     this.service.deleteItem(this.item).subscribe(result => {
       console.log(result)
       this.onSucess()
-
+      this.cancel()
     })
   }
 

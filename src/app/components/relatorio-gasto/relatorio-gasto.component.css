@@ -1,0 +1,11 @@
+.relatorio{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+table{
+  margin-top: 200px;
+  width: 500px;
+}

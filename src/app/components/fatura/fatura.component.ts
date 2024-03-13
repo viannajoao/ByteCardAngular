@@ -16,6 +16,8 @@ export class FaturaComponent implements OnInit {
 
   item: CreditoPut = new CreditoPut();
   itemId:string = '';
+  filtroData: Date = new Date();
+  // comprasFiltradas: Compras[] = [];
 
   buys:Compras[] = []
   buysFiltered:Compras[] = [];
@@ -31,73 +33,64 @@ export class FaturaComponent implements OnInit {
 
   constructor(private service:ClientService, private snackBar: MatSnackBar, private route: ActivatedRoute) { }
 
-  ngOnInit(): void {
-    // this.selecionar()
-    // Recupera os parâmetros da URL
+  async ngOnInit(): Promise<void> {
 
-
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe(async params => {
 
       console.log(params)
-      // Verifica se há um parâmetro chamado 'id'
       if (params['id']) {
 
-        this.service.getCreditById(params['id']).subscribe(credit => {
+     const search = await this.service.getCreditById(params['id']).subscribe(async credit => {
           this.dadosRecebidos = credit
-
-          console.log(this.dadosRecebidos)
-          this.service.getCreditByCard(this.dadosRecebidos.numCartao).subscribe(retorno => {
-            this.buys.push(retorno)
-            this.buysFiltered = this.buys
-            console.log(this.buysFiltered)
-        }, err => { console.log(err) });
-        // console.log(this.buys)
+          const select = await this.selecionar(this.dadosRecebidos.numCartao)
         })
       }
 
-      // console.log(this.dadosRecebidos)
-
     });
 
-this.selecionar()
-alert(this.buys)
+
   }
 
-  selecionar():void{
-
-    this.service.getCreditByCard(this.dadosRecebidos.numCartao).subscribe(retorno => {
-      this.buys.push(retorno)
-      console.log(this.buys)
+  selecionar(id:string):void{
+    console.log(this.dadosRecebidos)
+      console.log(id)
+    this.service.getCreditByCard(id).subscribe(retorno => {
+      this.buys = retorno
+      this.buysFiltered = this.buys; // Atualiza a lista de compras filtradas
+      console.log(this.buysFiltered)
   }, err => { console.log(err) });
-  console.log(this.buys)
-  }
-
-  atualizar():void{
-    console.log(this.item)
-
-    this.item.limity = this.credit.limity
-
-    console.log(this.item)
-    this.service.updateCreditItem(this.item).subscribe(data => {
-      console.log(data)
-      this.onSucess()
-
-      // this.cancel()
-
-    })
-
 
   }
 
-  onSucess():void{
-    this.snackBar.open("Limite do cliente modificado", '', {
-      duration: 3000
-    })
+  formatarData(event: any) {
+    const dataSelecionada = event.target.value;
+    const [ano, mes] = dataSelecionada.split('-');
+    this.filtroData = new Date(parseInt(ano), parseInt(mes) - 1, 1);
+
+    this.filtrarComprasPorData()
   }
 
-  // cancel():void{
-  //   this.dialog.close()
-  // }
+  filtrarComprasPorData(): void {
+    if (this.filtroData) {
+        // Convertendo this.filtroData para uma string no formato 'yyyy-mm'
+        const ano = this.filtroData.getFullYear();
+        const mes = ('0' + (this.filtroData.getMonth() + 1)).slice(-2); // Obtém o mês com zero à esquerda, se necessário
+        const dataFormatada = `${ano}-${mes}`;
+
+        // Filtrar as compras com base na data formatada
+        this.buysFiltered = this.buys.filter(compra => {
+            // Convertendo a data da compra para o mesmo formato 'yyyy-mm'
+            const dataCompraArray = compra.date.split(' ')[0].split('/'); // Convertendo a data da compra para um array de strings ["dd", "mm", "yyyy"]
+            const dataCompraFormatada = `${dataCompraArray[2]}-${dataCompraArray[1]}`; // Montando a data da compra no formato 'yyyy-mm'
+
+            return dataCompraFormatada === dataFormatada;
+        });
+    } else {
+        // Se não houver uma data de filtro válida, exiba todas as compras
+        this.buysFiltered = this.buys;
+    }
+}
+
 
 
 
