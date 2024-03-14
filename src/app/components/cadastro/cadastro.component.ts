@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { PoDynamicFormField, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
+import { PoDynamicField } from '@po-ui/ng-components/lib/components/po-dynamic/po-dynamic-field.interface';
 import { Client } from 'src/app/models/Client';
 import { ClientService } from 'src/app/servico/client.service';
 
@@ -12,12 +14,20 @@ export class CadastroComponent  {
 
   client = new Client();
   clients:Client[] = [];
+  fields: Array<PoDynamicFormField> = [
+    {property: 'cpf', label: 'CPF', mask: '999.999.999-99', placeholder: '999.999.999-99' },
+    {property: 'name', label: 'NOME', placeholder: 'Digite o seu nome'},
+    {property: 'email', type: 'email', label: 'Email', icon: 'po-icon-mail', placeholder: 'usuario@gmail.com'},
+    {property: 'phone', mask: '(11)99999-9999', label: 'Telefone', placeholder: '(11)99999-9999'},
+
+  ]
+
 
   constructor(private service: ClientService, private snackBar: MatSnackBar) { }
 
 
 
-  cadastrar(): void {
+  cadastrar(event: any): void {
 
 
     this.client.cpf = Number(this.client.cpf).toString().padStart(11, '0');

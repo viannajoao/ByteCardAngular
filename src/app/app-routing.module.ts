@@ -9,6 +9,7 @@ import { ComprasComponent } from './components/compras/compras.component';
 import { ComprasCadastroComponent } from './components/compras-cadastro/compras-cadastro.component';
 import { RelatorioGastoComponent } from './components/relatorio-gasto/relatorio-gasto.component';
 import { RelatorioComponent } from './components/relatorio/relatorio.component';
+import { PoPageDynamicEditComponent } from '@po-ui/ng-templates';
 
 const routes: Routes = [
 
@@ -19,11 +20,6 @@ const routes: Routes = [
   {
     path: '',
     component: MainComponent,
-    data: {
-      serviceApi: 'http://localhost:8080', // endpoint dos dados
-      serviceMetadataApi: 'http://localhost:8080',
-      serviceLoadApi: 'http://localhost:8080' // endpoint de customizações dos metadados utilizando o método HTTP Post
-    }
   },
   {
     path: 'cartoes',
@@ -52,6 +48,10 @@ const routes: Routes = [
   {
     path: 'relatorios',
     component: RelatorioComponent
+  },
+  {
+    path: 'new',
+    component: PoPageDynamicEditComponent
   },
 ];
 

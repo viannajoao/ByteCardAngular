@@ -9,31 +9,33 @@
       <mat-label>Cliente</mat-label>
       <input matInput placeholder="Ex. João" value="Dennis" [(ngModel)]="clientSearch" name="clientSearch" >
     </mat-form-field>
-    <button mat-raised-button type="submit">Pesquisar</button>
+    <po-button p-kind="secondary" p-label="Pesquisar" p- mat-raised-button type="submit">Pesquisar</po-button>
 </form>
 </div>
 
+  <po-page-list>
+  <po-table [p-items]="items"  p-container="true" [p-sort]="true" [p-striped]="true" [p-height]="500" [p-infinite-scroll]="true" [p-columns]="columns"
+  [p-hide-detail]="true" [p-actions]="actions">
 
-  <po-table [p-items]="clientsFiltered" [p-sort]="true" [p-striped]="true" [p-height]="400" [p-infinite-scroll]="true" mat-table class="mat-elevation-z8">
+</po-table>
+  </po-page-list>
 
-    <ng-container matColumnDef="cpf">
+    <!-- <ng-container matColumnDef="cpf">
       <th mat-header-cell *matHeaderCellDef> CPF </th>
       <td mat-cell *matCellDef="let c"> {{c.cpf}} </td>
     </ng-container>
 
-    <!-- Name Column -->
+
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> NOME </th>
       <td mat-cell *matCellDef="let c"> {{c.name}} </td>
     </ng-container>
 
-    <!-- Weight Column -->
     <ng-container matColumnDef="email">
       <th mat-header-cell *matHeaderCellDef> E-MAIL </th>
       <td mat-cell *matCellDef="let c"> {{c.email}} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
     <ng-container matColumnDef="tel">
       <th mat-header-cell *matHeaderCellDef> TELEFONE </th>
       <td mat-cell *matCellDef="let c"> {{c.tel}} </td>
@@ -49,7 +51,7 @@
 
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </po-table>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> -->
+
 
 

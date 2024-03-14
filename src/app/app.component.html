@@ -1,2 +1,9 @@
-<app-navbar></app-navbar>
-<router-outlet></router-outlet>
+<!-- <app-navbar></app-navbar>
+<router-outlet></router-outlet> -->
+<div class="po-wrapper">
+  <po-toolbar p-title="AppName"></po-toolbar>
+
+
+  <po-menu [p-menus]="menus" [p-filter]="true"></po-menu>
+  <router-outlet></router-outlet>
+</div>

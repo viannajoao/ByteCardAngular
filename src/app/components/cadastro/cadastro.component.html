@@ -2,7 +2,7 @@
   <h1>Cadastrar Cliente</h1>
 
 
-  <form class="container-form" (ngSubmit)="cadastrar()">
+  <!-- <form class="container-form" (ngSubmit)="cadastrar()">
 
     <mat-form-field >
       <mat-label>CPF</mat-label>
@@ -25,7 +25,11 @@
     </mat-form-field>
     <button mat-raised-button color="primary" type="submit" class="btn1" value="Cadastrar">Cadastrar</button>
     <button mat-raised-button color="warn" routerLink="/" class="btn2">Cancelar</button>
-  </form>
+  </form> -->
+  <po-dynamic-form [p-fields]="fields" (p-form)="cadastrar($event)">
 
+  </po-dynamic-form>
+  <po-button p-label="Adicionar" [p-disabled]="true">
+  </po-button>
 </div>
 

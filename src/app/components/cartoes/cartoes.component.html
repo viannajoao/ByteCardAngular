@@ -13,27 +13,32 @@
 </form>
 </div>
 
+<po-page-list>
+<po-table [p-items]="items" p-container="true" [p-sort]="true" [p-striped]="true" [p-height]="500" [p-infinite-scroll]="true" [p-columns]="columns"
+[p-hide-detail]="true" [p-actions]="actions">
 
-  <table mat-table [dataSource]="creditsFiltered" class="mat-elevation-z8">
+</po-table>
+</po-page-list>
+
+  <!-- <table mat-table [dataSource]="creditsFiltered" class="mat-elevation-z8">
 
     <ng-container matColumnDef="numero">
       <th mat-header-cell *matHeaderCellDef> Numero </th>
       <td mat-cell *matCellDef="let c"> {{c.numCartao}} </td>
     </ng-container>
 
-    <!-- Name Column -->
+
     <ng-container matColumnDef="cliente">
       <th mat-header-cell *matHeaderCellDef> Cliente </th>
       <td mat-cell *matCellDef="let c"> {{c.client}} </td>
     </ng-container>
 
-    <!-- Weight Column -->
     <ng-container matColumnDef="limite">
       <th mat-header-cell *matHeaderCellDef> LIMITE </th>
       <td mat-cell *matCellDef="let c"> {{c.limity}} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
+
     <ng-container matColumnDef="validade">
       <th mat-header-cell *matHeaderCellDef> VALIDADE </th>
       <td mat-cell *matCellDef="let c"> {{c.validade}} </td>
@@ -53,5 +58,5 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+  </table> -->
 
