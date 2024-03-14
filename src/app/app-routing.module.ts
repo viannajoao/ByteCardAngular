@@ -18,7 +18,12 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: MainComponent
+    component: MainComponent,
+    data: {
+      serviceApi: 'http://localhost:8080', // endpoint dos dados
+      serviceMetadataApi: 'http://localhost:8080',
+      serviceLoadApi: 'http://localhost:8080' // endpoint de customizações dos metadados utilizando o método HTTP Post
+    }
   },
   {
     path: 'cartoes',

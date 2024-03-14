@@ -1,5 +1,5 @@
 <div class="inputClient">
-  <button mat-raised-button color="primary" routerLink="cadastrar">Cadastrar Cliente</button>
+  <po-button p-icon="po-icon po-icon-user-add" p-label="Cadastrar Cliente" p-kind="primary" mat-raised-button color="primary" routerLink="cadastrar">Cadastrar Cliente</po-button>
   <h1 class="title">Listagem de Clientes</h1>
 </div>
 
@@ -14,7 +14,7 @@
 </div>
 
 
-  <table mat-table [dataSource]="clientsFiltered" class="mat-elevation-z8">
+  <po-table [p-items]="clientsFiltered" [p-sort]="true" [p-striped]="true" [p-height]="400" [p-infinite-scroll]="true" mat-table class="mat-elevation-z8">
 
     <ng-container matColumnDef="cpf">
       <th mat-header-cell *matHeaderCellDef> CPF </th>
@@ -50,6 +50,6 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+  </po-table>
 
 
