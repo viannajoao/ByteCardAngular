@@ -15,13 +15,14 @@ export class MainComponent implements OnInit {
 
   client: Client = new Client();
   clients:Client[] = [];
-  clientsFiltered: any[] = [{
-    cpf: this.client.cpf,
-    name: this.client.name,
-    email: this.client.email,
-    tel: this.client.tel
+  // clientsFiltered: any[] = [{
+  //   cpf: this.client.cpf,
+  //   name: this.client.name,
+  //   email: this.client.email,
+  //   tel: this.client.tel
 
-  }];
+  // }];
+  clientsFiltered: any[] = [];
   clientSearch: string = "";
   displayedColumns = [ 'cpf' , 'name', 'email', 'tel', 'actions'];
 
