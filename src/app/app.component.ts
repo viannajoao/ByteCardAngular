@@ -15,9 +15,18 @@ export class AppComponent {
  constructor( private router: Router, private dialog: MatDialog){}
 
   readonly menus: Array<PoMenuItem> = [
-    { label: 'Clientes', action: this.onHome.bind(this)},
-    { label: 'Cartoes', action: this.onCartoes.bind(this)},
-    { label: 'Compras', action: this.onCompras.bind(this)},
+    { label: 'Clientes', subItems: [
+      {label: 'Listas de Clientes', link: '/'},
+      {label: 'Cadastrar Clientes', link: '/cadastrar'}
+    ]},
+    { label: 'Cartoes', subItems: [
+      {label: 'Listas de Cartoes', link: '/cartoes'},
+      {label: 'Cadastrar Cartao', link: '/cartoes/cadastrarCartao'}
+    ]},
+    { label: 'Compras', subItems: [
+      {label: 'Cadastrar Compras', link: '/compras/cadastrarCompras'},
+      {label: 'Relatorio de gastos', link: '/compras/relatorioGastos'}
+    ]},
     { label: 'Relatorios', action: this.onRelatorios.bind(this)},
   ];
 

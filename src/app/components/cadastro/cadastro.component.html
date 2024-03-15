@@ -1,35 +1,18 @@
-<div class="container-cadastro">
+
   <h1>Cadastrar Cliente</h1>
-
-
-  <!-- <form class="container-form" (ngSubmit)="cadastrar()">
-
-    <mat-form-field >
-      <mat-label>CPF</mat-label>
-        <input matInput type="number" placeholder="227398996119" name="cpf" [(ngModel)]="client.cpf">
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Nome</mat-label>
-    <input matInput type="text" placeholder="Jasmini" name="name"  [(ngModel)]="client.name">
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>E-mail</mat-label>
-    <input matInput type="text" placeholder="usuario@gmail.com" name="email"  [(ngModel)]="client.email">
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Telefone</mat-label>
-      <input matInput type="number" placeholder="(11)98765-3379" name="tel"  [(ngModel)]="client.tel">
-    </mat-form-field>
-    <button mat-raised-button color="primary" type="submit" class="btn1" value="Cadastrar">Cadastrar</button>
-    <button mat-raised-button color="warn" routerLink="/" class="btn2">Cancelar</button>
-  </form> -->
-  <po-dynamic-form [p-fields]="fields" (p-form)="cadastrar($event)">
+  <!-- <po-dynamic-form [p-fields]="fields" (p-form)="cadastrar($event)">
 
   </po-dynamic-form>
   <po-button p-label="Adicionar" [p-disabled]="true">
-  </po-button>
-</div>
+  </po-button> -->
+<po-page-edit (p-save)="cadastrar()" (p-cancel)="cancel()" [p-disable-submit]="false">
+  <form #formCustomer="ngForm">
+    <po-input p-label="CPF" name="cpf" [(ngModel)]="client.cpf" p-required p-mask="999.999.999-99"></po-input>
+    <po-input p-label="NOME" name="name" [(ngModel)]="client.name" p-required></po-input>
+    <po-input p-label="E-MAIL" name="email" [(ngModel)]="client.email" p-required></po-input>
+    <po-input p-label="TELEFONE" name="tel" [(ngModel)]="client.tel" p-required p-mask="(11)99999-9999"></po-input>
+  </form>
+
+</po-page-edit>
+
 

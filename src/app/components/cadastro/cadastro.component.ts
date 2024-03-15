@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Route, Router } from '@angular/router';
 import { PoDynamicFormField, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
 import { PoDynamicField } from '@po-ui/ng-components/lib/components/po-dynamic/po-dynamic-field.interface';
 import { Client } from 'src/app/models/Client';
@@ -23,13 +24,13 @@ export class CadastroComponent  {
   ]
 
 
-  constructor(private service: ClientService, private snackBar: MatSnackBar) { }
+  constructor(private service: ClientService, private snackBar: MatSnackBar, private route: Router) { }
 
 
 
-  cadastrar(event: any): void {
+  cadastrar(): void {
 
-
+    console.log(this.client)
     this.client.cpf = Number(this.client.cpf).toString().padStart(11, '0');
     this.client.tel.toString();
 
@@ -76,6 +77,10 @@ export class CadastroComponent  {
       this.snackBar.open('CPF inválido ou E-mail já cadastrado', '', {
         duration: 3000
       });
+    }
+
+    cancel() {
+      this.route.navigateByUrl('/')
     }
 
 

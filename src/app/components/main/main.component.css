@@ -56,5 +56,9 @@ table{
 }
 
 button{
-  margin-right: 10px;
+  margin-right: 10px ;
+}
+
+#search{
+  --color: yellow !important;
 }

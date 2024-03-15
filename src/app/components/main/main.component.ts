@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog} from '@angular/material/dialog';
 import { Client } from 'src/app/models/Client';
 import { ClientService } from 'src/app/servico/client.service';
 import { CadastroComponent } from '../cadastro/cadastro.component';
 import { DialogClientComponent } from '../dialog-client/dialog-client.component';
 import { DialodDeleteComponent } from '../dialod-delete/dialod-delete.component';
-import { PoTableAction, PoTableColumn } from '@po-ui/ng-components';
+import { PoModalAction, PoModalComponent, PoPageAction, PoPageFilter, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
+import { Router } from '@angular/router';
+import { PoPageDynamicSearch, PoPageDynamicSearchFilters } from '@po-ui/ng-templates';
 
 @Component({
   selector: 'app-main',
@@ -25,9 +27,13 @@ export class MainComponent implements OnInit {
     tel: this.client.tel,
   }]
 
+  public addClient: Array<any> = [
+    {label: 'Adicionar Cliente', action: this.onAddClient.bind(this), icon: 'po-icon-user-add', color: 'yellow'},
+  ]
+
   public actions: Array<PoTableAction> = [
     {label: 'Delete', action: this.openDialogDelete.bind(this)},
-    {label: 'Edit', action: this.openDialog.bind(this)},
+    {label: 'Editar', action: this.openDialog.bind(this)},
   ]
 
   readonly columns: Array<PoTableColumn> = [
@@ -38,14 +44,29 @@ export class MainComponent implements OnInit {
     // {property: 'this.actions' ,label: 'ACOES', }
   ]
 
+  // public search: Array<PoPageDynamicSearch> = [
+  //   { actions: this.onKeyPress.bind(this)}
+  // ]
+
   deleteItem(item: any) {
     console.log('Excluir item:', item);
     // Adicione o código para excluir o item aqui
   }
 
+
+
   clientSearch: string = "";
 
-  constructor(private service:ClientService, private dialog:MatDialog){}
+  pesquisar():void {
+    console.log(this.clientsFiltered)
+    console.log(this.clientSearch)
+    this.clientsFiltered = this.items.filter(usuario =>
+      usuario.name.toLowerCase().includes(this.clientSearch.toLowerCase())
+    );
+  }
+
+
+  constructor(private service:ClientService, private dialog:MatDialog, private route: Router){}
 
 
 
@@ -61,12 +82,7 @@ export class MainComponent implements OnInit {
     )
   }
 
-  pesquisar():void {
-    console.log(this.clientsFiltered)
-    this.clientsFiltered = this.items.filter(usuario =>
-      usuario.name.toLowerCase().includes(this.clientSearch.toLowerCase())
-    );
-  }
+
 
 
   openDialog(item: any){
@@ -78,6 +94,7 @@ export class MainComponent implements OnInit {
     console.log(editClient);
     const dialogRef =  this.dialog.open(DialogClientComponent, {
       width: '900px',
+      height: '500px',
       data: {id: editClient.id ,cpf: editClient.cpf, name: editClient.name, email: editClient.email, tel: editClient.tel}
     });
 
@@ -100,11 +117,17 @@ export class MainComponent implements OnInit {
     })
   }
 
+  onAddClient(){
+    this.route.navigateByUrl('/cadastrar')
+  }
+
   ngOnInit(): void {
     this.selecionar();
     console.log(this.clients)
 
   }
+
+
 
 
 
