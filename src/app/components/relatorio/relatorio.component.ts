@@ -61,35 +61,36 @@ export class RelatorioComponent implements OnInit {
     const [ano, mes] = dataSelecionada.split('-');
     this.filtroData = new Date(parseInt(ano), parseInt(mes) - 1, 1);
     console.log(this.filtroData)
-    this.filtrarComprasPorData()
+    // this.filtrarComprasPorData()
   }
 
 
-filtrarComprasPorData(): void {
-  if (this.filtroData) {
-      const ano = this.filtroData.getFullYear();
-      const mes = ('0' + (this.filtroData.getMonth() + 1)).slice(-2);
-      const dataFormatada = `${ano}-${mes}`;
-      console.log(dataFormatada)
+filtrarComprasPorData(event:any): void {
+  if (event) {
+    console.log(event);
+    // Convertendo a data do evento para o mesmo formato 'mm/yyyy'
+    const dataEventoArray = event.split('/'); // Convertendo a data do evento para um array de strings ["dd", "mm", "yyyy"]
+    const dataEventoFormatada = `${dataEventoArray[1]}/${dataEventoArray[2]}`; // Montando a data do evento no formato 'mm/yyyy'
+    console.log(dataEventoFormatada)
 
       // Filtrar as compras com base na data formatada
       this.maisComprasFiltered = this.maisCompras.filter(compra => {
           const dataCompraArray = compra.horario.split(' ')[0].split('/');
-          const dataCompraFormatada = `${dataCompraArray[2]}-${dataCompraArray[1]}`;
+          const dataCompraFormatada = `${dataCompraArray[1]}/${dataCompraArray[2]}`;
           console.log(dataCompraFormatada)
-          return dataCompraFormatada === dataFormatada;
+          return dataCompraFormatada === dataEventoFormatada;
       });
       this.maisGastaramFiltered = this.maisGastaram.filter(compra => {
         const dataCompraArray = compra.horario.split(' ')[0].split('/');
-        const dataCompraFormatada = `${dataCompraArray[2]}-${dataCompraArray[1]}`;
+        const dataCompraFormatada = `${dataCompraArray[1]}/${dataCompraArray[2]}`;
         console.log(dataCompraFormatada)
-        return dataCompraFormatada === dataFormatada;
+        return dataCompraFormatada === dataEventoFormatada;
       });
       this.notBuyFiltered = this.notBuy.filter(compra => {
         const dataCompraArray = compra.horario.split(' ')[0].split('/');
-        const dataCompraFormatada = `${dataCompraArray[2]}-${dataCompraArray[1]}`;
+        const dataCompraFormatada = `${dataCompraArray[1]}/${dataCompraArray[2]}`;
         console.log(dataCompraFormatada)
-        return dataCompraFormatada === dataFormatada;
+        return dataCompraFormatada === dataEventoFormatada;
       });
 
 

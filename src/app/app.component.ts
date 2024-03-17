@@ -4,6 +4,8 @@ import { Component } from '@angular/core';
 import { PoMenuItem } from '@po-ui/ng-components';
 import { MatDialog } from '@angular/material/dialog';
 import { StyleButtonComponent } from './components/style-button/style-button.component';
+import { AuthService } from './servico/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +14,7 @@ import { StyleButtonComponent } from './components/style-button/style-button.com
 })
 export class AppComponent {
 
- constructor( private router: Router, private dialog: MatDialog){}
+ constructor( private router: Router, private dialog: MatDialog, public authService: AuthService, private snackBar: MatSnackBar){}
 
   readonly menus: Array<PoMenuItem> = [
     { label: 'Clientes', subItems: [
@@ -28,6 +30,7 @@ export class AppComponent {
       {label: 'Relatorio de gastos', link: '/compras/relatorioGastos'}
     ]},
     { label: 'Relatorios', action: this.onRelatorios.bind(this)},
+    { label: 'Logout', action: this.onLogout.bind(this)},
   ];
 
   private onHome() {
@@ -49,6 +52,11 @@ export class AppComponent {
 
   private onRelatorios(){
     this.router.navigate(['/relatorios']);
+  }
+
+  private onLogout(){
+    this.snackBar.open("Logout feito com sucesso", ""  , {duration:2000});
+    localStorage.removeItem('token');
   }
 
 }

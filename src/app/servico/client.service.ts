@@ -20,6 +20,8 @@ export class ClientService {
   private urlRelatorio:string = 'http://localhost:8080/relatorios';
   private urlRelatoioGastos: string = 'http://localhost:8080/relatorios/maisgastaram';
   private urlRelatorioNotBuy:string = 'http://localhost:8080/relatorios/clientsNotBuy'
+  private urlLogin:string = 'http://localhost:8080/auth/login';
+  private urlClientsFiltered: string = 'http://localhost:8080/cartoes/cadastrarCartao';
 
 
   constructor(private http:HttpClient) { }
@@ -46,6 +48,10 @@ export class ClientService {
     return this.http.get<Credito>(`${this.urlCartoes}/${id}`);
   }
 
+  getItemCreditById(id: string): Observable<CreditoPut> {
+    return this.http.get<CreditoPut>(`${this.urlCartoes}/${id}`);
+  }
+
   getCreditPutById(id: string): Observable<CreditoPut> {
     return this.http.get<CreditoPut>(`${this.urlCartoes}/${id}`);
   }
@@ -66,6 +72,10 @@ export class ClientService {
     return this.http.get<any[]>(`${this.urlRelatorioNotBuy}`); //
   }
 
+  getClientsFiltered():Observable<any[]>{
+    return this.http.get<any[]>(`${this.urlClientsFiltered}`)
+  }
+
   // ======================= POST ================================ //
 
 
@@ -82,6 +92,9 @@ export class ClientService {
     return this.http.post<Compras>(this.urlPostBuy, obj)
   }
 
+  solicitarLogin(obj:any):Observable<any>{
+    return this.http.post<any>(this.urlLogin, obj)
+  }
 
 // ================================= PUT ========================= //
 

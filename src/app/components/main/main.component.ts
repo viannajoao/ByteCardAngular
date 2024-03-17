@@ -1,13 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { MatDialog} from '@angular/material/dialog';
 import { Client } from 'src/app/models/Client';
 import { ClientService } from 'src/app/servico/client.service';
-import { CadastroComponent } from '../cadastro/cadastro.component';
 import { DialogClientComponent } from '../dialog-client/dialog-client.component';
 import { DialodDeleteComponent } from '../dialod-delete/dialod-delete.component';
-import { PoModalAction, PoModalComponent, PoPageAction, PoPageFilter, PoTableAction, PoTableColumn } from '@po-ui/ng-components';
+import { PoTableAction, PoTableColumn } from '@po-ui/ng-components';
 import { Router } from '@angular/router';
-import { PoPageDynamicSearch, PoPageDynamicSearchFilters } from '@po-ui/ng-templates';
+
 
 @Component({
   selector: 'app-main',
@@ -44,13 +43,11 @@ export class MainComponent implements OnInit {
     // {property: 'this.actions' ,label: 'ACOES', }
   ]
 
-  // public search: Array<PoPageDynamicSearch> = [
-  //   { actions: this.onKeyPress.bind(this)}
-  // ]
+
 
   deleteItem(item: any) {
     console.log('Excluir item:', item);
-    // Adicione o código para excluir o item aqui
+
   }
 
 
@@ -118,7 +115,7 @@ export class MainComponent implements OnInit {
   }
 
   onAddClient(){
-    this.route.navigateByUrl('/cadastrar')
+    this.route.navigateByUrl('/main/cadastrar')
   }
 
   ngOnInit(): void {

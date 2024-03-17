@@ -34,6 +34,18 @@ export class CartoesComponent implements OnInit {
 
   dadosSelect: CreditoPut = new CreditoPut();
 
+  public addCredit: Array<any> = [
+    {label: 'Adicionar Cartao', action: this.onAddCredit.bind(this), icon: 'po-icon-user-add', color: 'yellow'},
+  ]
+
+  pesquisar() {
+    console.log(this.creditsFiltered)
+    console.log(this.termoPesquisa)
+    this.creditsFiltered = this.items.filter(usuario =>
+      usuario.client.toLowerCase().includes(this.termoPesquisa.toLowerCase())
+    );
+  }
+
 
   readonly columns: Array<PoTableColumn> = [
     {property: 'numCartao',label: 'CARTAO', },
@@ -45,7 +57,7 @@ export class CartoesComponent implements OnInit {
 
   public actions: Array<PoTableAction> = [
     {label: 'Delete', action: this.openDialogDelete.bind(this)},
-    {label: 'Edit', action: this.openDialog.bind(this)},
+    {label: 'Editar', action: this.openDialog.bind(this)},
     {label: 'Fatura', action: this.fatura.bind(this)},
   ]
 
@@ -79,17 +91,13 @@ export class CartoesComponent implements OnInit {
   }
 
 
-  pesquisar() {
-    this.creditsFiltered = this.creditsPut.filter(usuario =>
-      usuario.client.toLowerCase().includes(this.termoPesquisa.toLowerCase())
-    );
-  }
 
-  openDialog(id:number){
 
-    this.creditPut = this.creditsPut[id];
+  openDialog(item:any){
+    console.log(item);
+    this.creditPut = item
     const editCredit = this.creditPut
-    console.log(this.item);
+    // console.log(this.item);
     const dialogRef =  this.dialog.open(DialogCardComponent, {
       width: '900px',
       data: {id: editCredit.id ,numCartao: editCredit.numCartao, validade: editCredit.validade, client: editCredit.client, cv: editCredit.cv, limity: editCredit.limity}
@@ -100,9 +108,9 @@ export class CartoesComponent implements OnInit {
     })
   }
 
-  openDialogDelete(id:number){
+  openDialogDelete(item:any){
 
-    this.creditPut = this.creditsPut[id];
+    this.creditPut = item
     const editCredit = this.creditPut
     console.log(editCredit);
     const dialogRef =  this.dialog.open(DialogDeleteCardComponent, {
@@ -121,6 +129,10 @@ export class CartoesComponent implements OnInit {
     console.log(this.dadosSelect);
     this.router.navigate(['cartoes', 'faturas', this.dadosSelect]);
 
+  }
+
+  onAddCredit(){
+    this.router.navigateByUrl('/cartoes/cadastrarCartao')
   }
 
   ngOnInit():void{

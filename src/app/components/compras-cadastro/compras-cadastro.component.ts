@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { PoComboOption, PoSelectOption } from '@po-ui/ng-components';
 import { Client } from 'src/app/models/Client';
 import { Compras } from 'src/app/models/Compras';
 import { Credito } from 'src/app/models/Credito';
@@ -18,8 +20,19 @@ export class ComprasCadastroComponent implements OnInit {
   buy:Compras = new Compras();
   buys:Compras[] = [];
   selectCredit: CreditoPut = new CreditoPut();
+  selectCredits: Credito = new Credito();
 
-  constructor(private service:ClientService, private snackBar: MatSnackBar) { }
+  creditsOptions: PoComboOption[] = [];
+
+  public readonly category: Array<PoSelectOption> = [
+    { label: 'Lazer', value: 'Lazer' },
+    { label: 'Saude', value: 'Saude' },
+    { label: 'Alimentacao', value: 'Alimentacao' },
+    { label: 'Viagem', value: 'Viagem' },
+    { label: 'PetShop', value: 'PetShop' },
+  ];
+
+  constructor(private service:ClientService, private snackBar: MatSnackBar, private route: Router) { }
 
   ngOnInit(): void {
     this.selecionar();
@@ -28,7 +41,26 @@ export class ComprasCadastroComponent implements OnInit {
 
   selecionar():void{
     this.service.selecionarCartoes()
-    .subscribe(retorno => this.creditsPut = retorno)
+    .subscribe(retorno => {
+      this.creditsPut = retorno
+      this.creditsOptions = this.creditsPut.map(credit => ({
+        label: credit.numCartao + " - " + credit.client,
+        value: credit.id
+      }))
+    })
+  }
+
+  getCreditById(creditSelect:any){
+    console.log(creditSelect)
+    this.service.getItemCreditById(creditSelect).subscribe(retorno => {
+      this.selectCredit = retorno
+      console.log(this.selectCredit)
+    });
+  }
+
+  getCategory(category:any){
+    console.log(category)
+    this.buy.categoria = category
   }
 
   cadastrar():void{
@@ -54,6 +86,10 @@ export class ComprasCadastroComponent implements OnInit {
     this.snackBar.open("Erro ao cadastrar", '', {
       duration: 3000
     })
+  }
+
+  cancel() {
+    this.route.navigateByUrl('/')
   }
 
 }

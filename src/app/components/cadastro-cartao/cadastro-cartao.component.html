@@ -1,25 +1,10 @@
-<div class="container-cadastro">
-  <h1>Cadastramento de Cartão</h1>
-
-<form class="container-form" (ngSubmit)="cadastrar()" >
-
-  <mat-form-field appearance="outline">
-    <mat-label>Clientes</mat-label>
-    <mat-select name="client" [(ngModel)]="selectClient">
-      <mat-option *ngFor="let c of clients" [value]="c" >
-        {{c.name}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field appearance="outline">
-    <mat-label>Limite</mat-label>
-    <input matInput type="number"  placeholder="Ex. 1500"  name="limity" [(ngModel)]="credit.limity">
-  </mat-form-field>
-
-  <button type="submit" value="cadastrar" class="btn1" mat-raised-button color="primary">Cadastrar</button>
-  <button mat-raised-button color="warn" class="btn2" routerLink="/cartoes">Cancelar</button>
-
+<po-page-edit (p-save)="cadastrar()" (p-cancel)="cancel()">
+  <form #formCustomer="ngForm">
+  <po-combo class="po-md-2"
+   [p-options]="clientsOptions"
+   [p-placeholder]="'Selecione um cliente'"
+    name="client" (p-change)="getClientById($event)">
+  </po-combo>
+  <po-input p-label="LIMITE" name="limity" [(ngModel)]="credit.limity" p-required></po-input>
 </form>
-
-</div>
+</po-page-edit>
