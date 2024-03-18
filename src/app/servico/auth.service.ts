@@ -7,13 +7,31 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-
+  private inactivityTimeout: any;
+  private readonly inactivityDuration = 30 * 60 * 1000;
   token: any = ''
 
 
-  constructor(private service: ClientService, private router: Router) { }
+  constructor(private service: ClientService, private router: Router) {
+    this.setupInactivityTimer();
+    this.detectUserActivity();
+   }
 
-    // Método para realizar o login
+  private setupInactivityTimer(): void {
+    this.inactivityTimeout = setTimeout(() => {
+      this.logout();
+    }, this.inactivityDuration);
+  }
+
+  private detectUserActivity(): void {
+    ['mousemove', 'mousedown', 'keypress', 'touchstart'].forEach(eventName => {
+      window.addEventListener(eventName, () => {
+        clearTimeout(this.inactivityTimeout);
+        this.setupInactivityTimer();
+      });
+    });
+  }
+
     login(obj: any): Promise<void> {
       return new Promise<void>((resolve, reject) => {
 
@@ -31,21 +49,21 @@ export class AuthService {
       })
     }
 
-    // Método para realizar o logout
+
     logout(): void {
-      // Lógica para fazer logout e remover o token do armazenamento local
+
+    localStorage.removeItem('token');
+
+    this.router.navigate(['/auth/login']);
     }
 
-    // Método para verificar se o usuário está autenticado
+
     isAuthenticated(): boolean {
       const token = localStorage.getItem('token')
       if(token != null){
         return true
       }
-      // Lógica para verificar se o token está presente e válido
-      // Normalmente, verifica se o token está no armazenamento local e se não expirou
-      // Retorna true se o usuário estiver autenticado, false caso contrário
-      return false; // Exemplo simples, você precisa implementar sua própria lógica
+      return false;
     }
 
 
