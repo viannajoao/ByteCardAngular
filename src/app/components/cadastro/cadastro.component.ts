@@ -50,6 +50,8 @@ export class CadastroComponent  {
               this.onSuccess()
               this.client = new Client()
               console.log(this.client)
+            }else if(error.status === 403) {
+                this.onToken()
             }else{
               console.error('Erro ao cadastrar cliente:', error);
               this.onErro();
@@ -77,6 +79,12 @@ export class CadastroComponent  {
       this.snackBar.open('CPF inválido ou E-mail já cadastrado', '', {
         duration: 3000
       });
+    }
+
+    onToken(){
+      this.snackBar.open('Usuário sem permissao ou CPF invalido', '', {
+        duration: 3000
+      })
     }
 
     cancel() {

@@ -65,6 +65,11 @@ export class CadastroCartaoComponent implements OnInit {
       console.log(retorno)
       this.credit = new Credito()
     }, err => {
+      if(err.status === 403){
+        this.onToken();
+      }else if(err.status === 200){
+        this.onSucess()
+      }
       this.onError();
     })
   }else{
@@ -82,6 +87,12 @@ export class CadastroCartaoComponent implements OnInit {
 
   onError():void{
     this.snackBar.open("Erro ao cadastrar", '', {
+      duration: 3000
+    })
+  }
+
+  onToken(){
+    this.snackBar.open('Usuário sem permissao ou CPF invalido', '', {
       duration: 3000
     })
   }

@@ -72,6 +72,11 @@ export class ComprasCadastroComponent implements OnInit {
       console.log(this.buys)
       this.buy = new Compras();
     }, err => {
+      if(err.status === 403){
+        this.onToken();
+      }else if(err.status === 200){
+        this.onSucess()
+      }
       this.onError();
     })
   }
@@ -84,6 +89,12 @@ export class ComprasCadastroComponent implements OnInit {
 
   onError():void{
     this.snackBar.open("Erro ao cadastrar", '', {
+      duration: 3000
+    })
+  }
+
+  onToken(){
+    this.snackBar.open('Usuário sem permissao ou CPF invalido', '', {
       duration: 3000
     })
   }
