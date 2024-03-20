@@ -34,10 +34,14 @@ export class DialogClientComponent implements OnInit {
 
   atualizar():void{
 
+    this.client.cpf = Number(this.client.cpf).toString().padStart(11, '0');
+
     this.item.cpf = this.client.cpf
     this.item.name = this.client.name
     this.item.email = this.client.email
     this.item.tel = this.client.tel
+
+
 
     if (this.client.cpf && this.client.tel && this.client.name && this.client.email != '') {
       this.service.updateItem(this.item).subscribe(
