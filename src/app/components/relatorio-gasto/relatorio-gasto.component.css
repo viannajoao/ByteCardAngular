@@ -10,3 +10,14 @@ table{
   width: 500px;
   margin: 0 auto;
 }
+
+:host ::ng-deep po-combo{
+  width: 75%;
+  justify-self: end;
+  margin-top: 24px;
+}
+
+:host ::ng-deep po-button button{
+  width: 25%;
+  margin-top: 30px;
+}

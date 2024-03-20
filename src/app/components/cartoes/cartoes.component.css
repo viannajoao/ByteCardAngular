@@ -45,3 +45,8 @@ table{
 button{
   margin-right: 10px;
 }
+
+:host ::ng-deep .po-page-list-actions{
+  display: flex;
+  justify-content: end;
+}

@@ -35,10 +35,7 @@ const routes: Routes = [
     path: 'cartoes/faturas/:id', canActivate: [AuthGuard],
     component: FaturaComponent
   },
-  {
-    path: 'compras', canActivate: [AuthGuard],
-    component: ComprasComponent
-  },
+
   {
     path: 'compras/cadastrarCompras', canActivate: [AuthGuard],
     component: ComprasCadastroComponent

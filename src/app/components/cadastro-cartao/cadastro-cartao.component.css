@@ -39,6 +39,38 @@ mat-form-field{
   left: -100px;
 }
 
+:host ::ng-deep form{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr) ;
+}
 
+:host ::ng-deep po-combo{
+  width: 80%;
+  justify-self: end;
+  margin-top: 24px;
+}
 
+:host ::ng-deep po-input:last-child{
+  width: 80%;
+  grid-column: 2;
+
+}
+
+@media screen and (max-width: 479px){
+  :host ::ng-deep form{
+    display: block;
+  }
+
+  :host ::ng-deep po-input:last-child{
+    width: 100%;
+    grid-column: 2;
+
+  }
+
+  :host ::ng-deep po-combo{
+    width: 100%;
+    justify-self: end;
+    margin-top: 24px;
+  }
+}
 

@@ -62,3 +62,9 @@ button{
 #search{
   --color: yellow !important;
 }
+
+
+:host ::ng-deep .po-page-list-actions{
+  display: flex;
+  justify-content: end;
+}

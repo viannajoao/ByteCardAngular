@@ -1,0 +1,19 @@
+:host ::ng-deep form{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+}
+
+
+:host ::ng-deep po-combo{
+  width: 100%;
+  justify-self: end;
+  margin-top: 24px;
+}
+
+@media screen and (max-width: 479px){
+  :host ::ng-deep form{
+    display: block;
+  }
+}

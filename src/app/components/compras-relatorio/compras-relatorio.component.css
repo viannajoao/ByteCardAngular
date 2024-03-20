@@ -1,0 +1,9 @@
+:host ::ng-deep po-combo{
+  width: 100%;
+  justify-self: end;
+  margin-top: 24px;
+}
+
+:host ::ng-deep po-button{
+  width: 200px;
+}

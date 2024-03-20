@@ -1,0 +1,8 @@
+:host ::ng-deep .po-page-login-highlight-image{
+  background-size: contain ;
+  background-color: #FFF;
+}
+
+:host ::ng-deep  .po-page-login-container{
+  background-color: #FFF;
+}

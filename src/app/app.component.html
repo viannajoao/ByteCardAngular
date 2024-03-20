@@ -3,7 +3,7 @@
 <div class="po-wrapper" >
   <po-toolbar p-title="SoftBank" *ngIf="authService.isAuthenticated()"></po-toolbar>
 
-  <po-menu [p-menus]="menus" [p-filter]="true" p-logo="../assets/logo.png" *ngIf="authService.isAuthenticated()"></po-menu>
+  <po-menu [p-menus]="menus" [p-filter]="true" p-logo="../assets/logo.svg" *ngIf="authService.isAuthenticated()"></po-menu>
 
   <router-outlet *ngIf="authService.isAuthenticated()"></router-outlet>
 </div>

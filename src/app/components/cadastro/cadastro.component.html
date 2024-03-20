@@ -8,8 +8,8 @@
 <po-page-edit (p-save)="cadastrar()" (p-cancel)="cancel()" [p-disable-submit]="false">
   <form #formCustomer="ngForm">
     <po-input p-label="CPF" name="cpf" [(ngModel)]="client.cpf" p-required p-mask="999.999.999-99"></po-input>
-    <po-input p-label="NOME" name="name" [(ngModel)]="client.name" p-required></po-input>
-    <po-input p-label="E-MAIL" name="email" [(ngModel)]="client.email" p-required></po-input>
+    <po-input p-label="NOME" class="input-name" name="name" [(ngModel)]="client.name" p-required></po-input>
+    <po-input p-label="E-MAIL" class="input-email" name="email" [(ngModel)]="client.email" p-required></po-input>
     <po-input p-label="TELEFONE" name="tel" [(ngModel)]="client.tel" p-required p-mask="(11)99999-9999"></po-input>
   </form>
 

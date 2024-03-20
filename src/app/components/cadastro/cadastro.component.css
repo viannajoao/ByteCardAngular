@@ -55,3 +55,70 @@
   margin-right: 20px;
   margin-top: 40px;
 }
+
+
+:host ::ng-deep form{
+  display: grid;
+ grid-template-columns: repeat(2, 1fr);
+ grid-template-rows: repeat(2, 1fr);
+ align-items: center;
+ justify-content: center;
+ gap: 20px;
+}
+
+:host ::ng-deep po-input.input-name{
+  width: 70%;
+
+}
+
+:host ::ng-deep po-input.input-email{
+  width: 70%;
+  justify-self: end;
+}
+
+:host ::ng-deep po-input:first-child{
+  width: 70%;
+  grid-column: 1;
+  justify-self: end;
+}
+
+
+
+:host ::ng-deep po-input:last-child{
+  width: 70%;
+  grid-column: 2;
+
+}
+
+@media screen and (max-width: 780px) {
+  :host ::ng-deep po-input.input-name{
+    width: 100%;
+
+  }
+
+  :host ::ng-deep po-input.input-email{
+    width: 100%;
+    justify-self: end;
+  }
+
+  :host ::ng-deep po-input:first-child{
+    width: 100%;
+    grid-column: 1;
+    justify-self: end;
+  }
+
+
+
+  :host ::ng-deep po-input:last-child{
+    width: 100%;
+    grid-column: 2;
+
+  }
+}
+
+@media screen and (max-width: 590px){
+
+  :host ::ng-deep form{
+   display: block;
+  }
+}
