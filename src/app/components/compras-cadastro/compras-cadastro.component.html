@@ -1,39 +1,12 @@
-<div class="container-buy">
-<h1>Cadastrar compras</h1>
-
-<form class="container-form" (ngSubmit)="cadastrar()">
-
-<mat-form-field appearance="outline">
-  <mat-label>Clientes</mat-label>
-  <mat-select name="numCartao" [(ngModel)]="selectCredit">
-    <mat-option *ngFor="let c of creditsPut" [value]="c" >
-      {{"cartão: " + c.numCartao + "   - cliente: " + c.client}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-
-<mat-form-field appearance="outline">
-  <mat-label>Valor</mat-label>
-  <input matInput type="number"  placeholder="Ex. 120,90"  name="valor" [(ngModel)]="buy.valor">
-</mat-form-field>
-
-<mat-form-field appearance="fill">
-  <mat-label>Cars</mat-label>
-  <select matNativeControl required name="categoria" [(ngModel)]="buy.categoria">
-    <option value="Lazer">Lazer</option>
-    <option value="Alimetacao">Alimentação</option>
-    <option value="saude">Saúde</option>
-    <option value="viagem">Viagem</option>
-  </select>
-</mat-form-field>
-
-<mat-form-field appearance="outline">
-  <mat-label>Estabelecimento</mat-label>
-  <input matInput type="text"  placeholder="Ex. 1500"  name="estabelecimento" [(ngModel)]="buy.estabelecimento">
-</mat-form-field>
-
-<button type="submit" value="cadastrar" class="btn1" mat-raised-button color="primary">Cadastrar</button>
-<button mat-raised-button color="warn" class="btn2" routerLink="/">Cancelar</button>
-</form>
-
-</div>
+<po-page-edit p-title="Cadastrar Compras" (p-save)="cadastrar()" (p-cancel)="cancel()">
+  <form #formCustomer="ngForm">
+    <po-combo class="po-md-2"
+    [p-options]="creditsOptions"
+    [p-placeholder]="'Selecione um cliente'"
+     name="client" (p-change)="getCreditById($event)">
+   </po-combo>
+   <po-input p-label="VALOR" name="valor" [(ngModel)]="buy.valor"></po-input>
+   <po-select p-label="CATEGORIA" [p-options]="category" (p-change)="getCategory($event)"></po-select>
+   <po-input p-label="ESTABELECIMENTO" name="estabelecimento" [(ngModel)]="buy.estabelecimento"></po-input>
+  </form>
+</po-page-edit>

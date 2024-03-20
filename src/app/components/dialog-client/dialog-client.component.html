@@ -1,12 +1,19 @@
-<div class="container-cadastro">
+<!-- <div class="container-cadastro">
   <h1>Atualizar cliente</h1>
+</div> -->
 
+<po-page-edit (p-save)="atualizar()" (p-cancel)="cancel()" [p-disable-submit]="false" p-title="Atualizar Cliente">
+  <po-input p-label="CPF" name="data.cpf" p-disabled [(ngModel)]="data.cpf"></po-input>
+  <po-input p-label="NOME" name="name" p-required [(ngModel)]="client.name"></po-input>
+  <po-input p-label="E-MAIL" name="email" p-required [(ngModel)]="client.email"></po-input>
+  <po-input p-label="TELEFONE" name="tel" p-required p-mask="(11)99999-9999" [(ngModel)]="client.tel"></po-input>
+</po-page-edit>
 
-  <form class="container-form" (ngSubmit)="atualizar()">
+  <!-- <form class="container-form" (ngSubmit)="atualizar()">
 
     <mat-form-field >
       <mat-label>CPF</mat-label>
-        <input matInput type="number" [value]="data.cpf" placeholder="227398996119" name="cpf" [(ngModel)]="client.cpf">
+        <input matInput disabled="" type="number" [value]="data.cpf" placeholder="227398996119" name="cpf" [(ngModel)]="data.cpf">
     </mat-form-field>
 
     <mat-form-field>
@@ -25,6 +32,6 @@
     </mat-form-field>
     <button mat-raised-button color="primary" type="submit" class="btn1" value="Cadastrar">Atualizar</button>
     <button mat-raised-button color="warn" routerLink="/" class="btn2" (click)="cancel()">Cancelar</button>
-  </form>
+  </form> -->
 
-</div>
+

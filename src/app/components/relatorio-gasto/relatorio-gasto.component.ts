@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { PoComboOption } from '@po-ui/ng-components';
 import { Client } from 'src/app/models/Client';
 import { Compras } from 'src/app/models/Compras';
 import { Credito } from 'src/app/models/Credito';
@@ -31,6 +32,15 @@ export class RelatorioGastoComponent implements OnInit {
   displayedColumns = ['categoria', 'valor'];
 
   dadosRecebidos: any;
+  creditsOptions: PoComboOption[] = [];
+  selectCredit: CreditoPut = new CreditoPut();
+
+  public items: Array<any> = [{
+    date: this.buy.date,
+    categoria: this.buy.categoria,
+    estabelecimento: this.buy.estabelecimento,
+    valor: this.buy.valor,
+  }]
 
   constructor(private service:ClientService, private snackBar: MatSnackBar) { }
 
@@ -41,13 +51,27 @@ export class RelatorioGastoComponent implements OnInit {
 
   selecionar():void{
     this.service.selecionarCartoes()
-    .subscribe(retorno => this.creditsPut = retorno)
+    .subscribe(retorno => {
+      this.creditsPut = retorno
+      this.creditsOptions = this.creditsPut.map(credit => ({
+        label: credit.numCartao + " - " + credit.client,
+        value: credit.id
+      }))
+    })
+  }
+
+  getCreditById(creditSelect:any){
+    console.log(creditSelect)
+    this.service.getItemCreditById(creditSelect).subscribe(retorno => {
+      this.selectCredit = retorno
+      console.log(this.selectCredit)
+    });
   }
 
   buscarCompras():void{
-    this.service.getCreditByCard(this.buy.cartao).subscribe(retorno => {
-      this.buys = retorno
-      this.buysFiltered = this.buys; // Atualiza a lista de compras filtradas
+    this.service.getCreditByCard(this.selectCredit.numCartao).subscribe(retorno => {
+      this.items = retorno
+      this.buysFiltered = this.items; // Atualiza a lista de compras filtradas
       console.log(this.buysFiltered)
       this.filtroCategorias()
   }, err => { console.log(err) });
@@ -104,23 +128,28 @@ export class RelatorioGastoComponent implements OnInit {
     const [ano, mes] = dataSelecionada.split('-');
     this.filtroData = new Date(parseInt(ano), parseInt(mes) - 1, 1);
     console.log(this.filtroData)
-    this.filtrarComprasPorData()
+    // this.filtrarComprasPorData()
   }
 
 
-filtrarComprasPorData(): void {
-  if (this.filtroData) {
-      const ano = this.filtroData.getFullYear();
-      const mes = ('0' + (this.filtroData.getMonth() + 1)).slice(-2);
-      const dataFormatada = `${ano}-${mes}`;
-      console.log(dataFormatada)
-      // Filtrar as compras com base na data formatada
-      this.buysFiltered = this.buys.filter(compra => {
-          const dataCompraArray = compra.date.split(' ')[0].split('/');
-          const dataCompraFormatada = `${dataCompraArray[2]}-${dataCompraArray[1]}`;
-          console.log(dataCompraFormatada)
-          return dataCompraFormatada === dataFormatada;
-      });
+filtrarComprasPorData(event:any): void {
+  if (event) {
+    console.log(event);
+    // Convertendo a data do evento para o mesmo formato 'mm/yyyy'
+    const dataEventoArray = event.split('/'); // Convertendo a data do evento para um array de strings ["dd", "mm", "yyyy"]
+    const dataEventoFormatada = `${dataEventoArray[1]}/${dataEventoArray[2]}`; // Montando a data do evento no formato 'mm/yyyy'
+    console.log(dataEventoFormatada);
+
+    // Filtrando as compras com base na data do evento
+    this.buysFiltered = this.items.filter(compra => {
+      // Convertendo a data da compra para o mesmo formato 'mm/yyyy'
+      const dataCompraArray = compra.date.split(' ')[0].split('/'); // Convertendo a data da compra para um array de strings ["dd", "mm", "yyyy"]
+      const dataCompraFormatada = `${dataCompraArray[1]}/${dataCompraArray[2]}`; // Montando a data da compra no formato 'mm/yyyy'
+
+      // Comparando a data da compra com a data do evento
+      return dataCompraFormatada === dataEventoFormatada;
+    });
+
 
       // Agrupar e somar as categorias
       let categoriasAgrupadas = this.buysFiltered.reduce((accumulator: any, current: any) => {
@@ -143,7 +172,7 @@ filtrarComprasPorData(): void {
 
       this.buysFiltered = categoriasAgrupadasArray;
   } else {
-      this.buysFiltered = this.buys;
+      this.buysFiltered = this.items;
   }
 }
 

@@ -18,7 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatTableModule} from '@angular/material/table';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogClientComponent } from './components/dialog-client/dialog-client.component';
@@ -38,6 +38,8 @@ import { RelatorioComponent } from './components/relatorio/relatorio.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import { PoModule } from '@po-ui/ng-components';
 import { PoTemplatesModule } from '@po-ui/ng-templates';
+import { LoginComponent } from './components/login/login.component';
+import { AuthInterceptorService } from './servico/auth-interceptor.service';
 
 
 
@@ -64,6 +66,7 @@ import { PoTemplatesModule } from '@po-ui/ng-templates';
     StyleButtonComponent,
     RelatorioGastoComponent,
     RelatorioComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,7 +92,13 @@ import { PoTemplatesModule } from '@po-ui/ng-templates';
     RouterModule.forRoot([]),
     PoTemplatesModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

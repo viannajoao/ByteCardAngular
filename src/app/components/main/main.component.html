@@ -1,55 +1,17 @@
-<div class="inputClient">
-  <button mat-raised-button color="primary" routerLink="cadastrar">Cadastrar Cliente</button>
-  <h1 class="title">Listagem de Clientes</h1>
-</div>
-
-<div class="search-container">
-  <form class="example-form" (ngSubmit)="pesquisar()">
-    <mat-form-field  t-form-field class="example-full-width">
-      <mat-label>Cliente</mat-label>
-      <input matInput placeholder="Ex. João" value="Dennis" [(ngModel)]="clientSearch" name="clientSearch" >
-    </mat-form-field>
-    <button mat-raised-button type="submit">Pesquisar</button>
-</form>
-</div>
 
 
-  <table mat-table [dataSource]="clientsFiltered" class="mat-elevation-z8">
 
-    <ng-container matColumnDef="cpf">
-      <th mat-header-cell *matHeaderCellDef> CPF </th>
-      <td mat-cell *matCellDef="let c"> {{c.cpf}} </td>
-    </ng-container>
+  <po-page-list p-title="Lista de Clientes" [p-actions]="addClient" >
+    <po-input class="po-field-medium" p-label="Buscar" p-placeholder="Jasmini" p-icon="po-icon po-icon-search" name="clientSearch" [(ngModel)]="clientSearch" (ngModelChange)="pesquisar()" p-clean="true" ></po-input>
+    <!-- <po-page-dynamic-search [p-actions]="addClient" [p-filters]="items" name="clientSearch" [(ngModel)]="clientSearch" (ngSubmit)="pesquisar()"> -->
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> NOME </th>
-      <td mat-cell *matCellDef="let c"> {{c.name}} </td>
-    </ng-container>
+  <po-table [p-items]="clientsFiltered"  p-container="true" [p-sort]="true" [p-striped]="true" [p-height]="600" [p-infinite-scroll]="true" [p-columns]="columns"
+  [p-hide-detail]="true" [p-actions]="actions">
 
-    <!-- Weight Column -->
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef> E-MAIL </th>
-      <td mat-cell *matCellDef="let c"> {{c.email}} </td>
-    </ng-container>
+</po-table>
+<!-- </po-page-dynamic-search> -->
 
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="tel">
-      <th mat-header-cell *matHeaderCellDef> TELEFONE </th>
-      <td mat-cell *matCellDef="let c"> {{c.tel}} </td>
-    </ng-container>
+  </po-page-list>
 
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef> AÇÕES </th>
-      <td mat-cell *matCellDef="let c; index as i">
-        <button mat-raised-button (click)="openDialog(i)">Alterar</button>
-        <button mat-raised-button (click)="openDialogDelete(i)" color="accent">excluir</button>
-      </td>
-    </ng-container>
-
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
 
 

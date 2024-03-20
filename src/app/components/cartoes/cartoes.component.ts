@@ -9,6 +9,7 @@ import { CreditoPut } from 'src/app/models/CreditoPut';
 import { Location } from '@angular/common';
 import { FaturaComponent } from '../fatura/fatura.component';
 import { Route, Router } from '@angular/router';
+import { PoTableAction, PoTableColumn } from '@po-ui/ng-components';
 
 @Component({
   selector: 'app-cartoes',
@@ -33,13 +34,47 @@ export class CartoesComponent implements OnInit {
 
   dadosSelect: CreditoPut = new CreditoPut();
 
+  public addCredit: Array<any> = [
+    {label: 'Adicionar Cartao', action: this.onAddCredit.bind(this), icon: 'po-icon-user-add', color: 'yellow'},
+  ]
+
+  pesquisar() {
+    console.log(this.creditsFiltered)
+    console.log(this.termoPesquisa)
+    this.creditsFiltered = this.items.filter(usuario =>
+      usuario.client.toLowerCase().includes(this.termoPesquisa.toLowerCase())
+    );
+  }
+
+
+  readonly columns: Array<PoTableColumn> = [
+    {property: 'numCartao',label: 'CARTAO', },
+    {property: 'client',label: 'CLIENTE', },
+    {property: 'limity',label: 'LIMITE', },
+    {property: 'validade',label: 'VALIDADE', },
+    // {property: 'this.actions' ,label: 'ACOES', }
+  ]
+
+  public actions: Array<PoTableAction> = [
+    {label: 'Delete', action: this.openDialogDelete.bind(this)},
+    {label: 'Editar', action: this.openDialog.bind(this)},
+    {label: 'Fatura', action: this.fatura.bind(this)},
+  ]
+
+  public items: Array<any> = [{
+    numCartao: this.creditPut.numCartao,
+    client: this.creditPut.client,
+    limity: this.creditPut.limity,
+    validade: this.creditPut.validade,
+  }]
+
   constructor(private service:ClientService, private dialog: MatDialog, private router: Router){}
 
   selecionarCard():void{
     this.service.selecionarCartoes()
     .subscribe( retorno => {
-      this.creditsPut = retorno
-      this.creditsFiltered = this.creditsPut
+      this.items = retorno
+      this.creditsFiltered = this.items
     })
   }
 
@@ -56,17 +91,13 @@ export class CartoesComponent implements OnInit {
   }
 
 
-  pesquisar() {
-    this.creditsFiltered = this.creditsPut.filter(usuario =>
-      usuario.client.toLowerCase().includes(this.termoPesquisa.toLowerCase())
-    );
-  }
 
-  openDialog(id:number){
 
-    this.creditPut = this.creditsPut[id];
+  openDialog(item:any){
+    console.log(item);
+    this.creditPut = item
     const editCredit = this.creditPut
-    console.log(this.item);
+    // console.log(this.item);
     const dialogRef =  this.dialog.open(DialogCardComponent, {
       width: '900px',
       data: {id: editCredit.id ,numCartao: editCredit.numCartao, validade: editCredit.validade, client: editCredit.client, cv: editCredit.cv, limity: editCredit.limity}
@@ -77,8 +108,9 @@ export class CartoesComponent implements OnInit {
     })
   }
 
-  openDialogDelete(id:number){
-    this.creditPut = this.creditsPut[id];
+  openDialogDelete(item:any){
+
+    this.creditPut = item
     const editCredit = this.creditPut
     console.log(editCredit);
     const dialogRef =  this.dialog.open(DialogDeleteCardComponent, {
@@ -91,30 +123,16 @@ export class CartoesComponent implements OnInit {
     })
   }
 
-  // openDialogFatura(id:number){
-
-  //   this.creditPut = this.creditsPut[id];
-  //   const editCredit = this.creditPut
-  //   console.log(this.item);
-  //   const dialogRef =  this.dialog.open(FaturaComponent, {
-  //     width: '1000px',
-  //     data: {id: editCredit.id ,numCartao: editCredit.numCartao, validade: editCredit.validade, client: editCredit.client, cv: editCredit.cv, limity: editCredit.limity}
-  //   });
-
-  //   dialogRef.afterClosed().subscribe(result => {
-
-  //   })
-  // }
-
-  fatura(dados:number) {
-    this.creditPut = this.creditsPut[dados];
-    this.dadosSelect = this.creditPut;
+  fatura(item:any) {
+    // this.creditPut = this.creditsPut[dados];
+    this.dadosSelect = item.id;;
     console.log(this.dadosSelect);
-    this.router.navigate(['cartoes', 'faturas', this.dadosSelect.id]);
+    this.router.navigate(['cartoes', 'faturas', this.dadosSelect]);
 
-    // this.router.navigate({ path: 'cartoes/faturas/:id', component: this.dadosSelect })
+  }
 
-    // this.router.navigate(['cartoes/faturas', component:this.dadosSelect.id]);
+  onAddCredit(){
+    this.router.navigateByUrl('/cartoes/cadastrarCartao')
   }
 
   ngOnInit():void{

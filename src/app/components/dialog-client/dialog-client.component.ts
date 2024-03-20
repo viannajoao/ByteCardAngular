@@ -36,7 +36,7 @@ export class DialogClientComponent implements OnInit {
 
     this.client.cpf = Number(this.client.cpf).toString().padStart(11, '0');
 
-    this.item.cpf = this.client.cpf
+    // this.item.cpf = this.client.cpf
     this.item.name = this.client.name
     this.item.email = this.client.email
     this.item.tel = this.client.tel

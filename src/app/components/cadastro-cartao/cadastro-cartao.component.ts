@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { PoComboFilter, PoComboOption, PoComboOptionGroup } from '@po-ui/ng-components';
 import { Client } from 'src/app/models/Client';
 import { Credito } from 'src/app/models/Credito';
 import { ClientService } from 'src/app/servico/client.service';
@@ -20,11 +22,34 @@ export class CadastroCartaoComponent implements OnInit {
 
   clientSelect: string = '';
 
-  constructor(private servico:ClientService, private snackBar: MatSnackBar){}
+  clientsOptions: PoComboOption[] = [];
+  // public readonly cartao: string = 'http://localhost:8080/cartoes';
+
+  public cartao: Array<PoComboFilter> = [
+
+  ]
+
+  constructor(private servico:ClientService, private snackBar: MatSnackBar, private route: Router){}
 
   selecionar():void{
-    this.servico.selecionarClientes()
-    .subscribe(retorno => this.clients = retorno)
+    this.servico.getClientsFiltered()
+    .subscribe(retorno => {
+      this.clients = retorno
+      this.clientsOptions = this.clients.map(client => ({
+        label: client.name, // Supondo que 'name' seja o nome do cliente
+        value: client.id, // Supondo que 'id' seja o identificador único do cliente
+      }));
+      console.log(this.clientsOptions)
+    } )
+
+  }
+
+  getClientById(clientSelect:any){
+    console.log(clientSelect)
+    this.servico.getItemById(clientSelect).subscribe(retorno => {
+      this.selectClient = retorno
+      console.log(this.selectClient)
+    })
   }
 
   cadastrar():void{
@@ -40,6 +65,11 @@ export class CadastroCartaoComponent implements OnInit {
       console.log(retorno)
       this.credit = new Credito()
     }, err => {
+      if(err.status === 403){
+        this.onToken();
+      }else if(err.status === 200){
+        this.onSucess()
+      }
       this.onError();
     })
   }else{
@@ -61,6 +91,12 @@ export class CadastroCartaoComponent implements OnInit {
     })
   }
 
+  onToken(){
+    this.snackBar.open('Usuário sem permissao ou CPF invalido', '', {
+      duration: 3000
+    })
+  }
+
   onLimity():void{
     this.snackBar.open("Preencha o campo limite para proceguir corretamente", '', {
       duration: 3000
@@ -71,6 +107,10 @@ export class CadastroCartaoComponent implements OnInit {
   ngOnInit() {
     this.selecionar()
     console.log(this.clients)
+  }
+
+  cancel() {
+    this.route.navigateByUrl('/cartoes')
   }
 
 }

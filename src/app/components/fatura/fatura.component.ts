@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { PoTableColumn } from '@po-ui/ng-components';
 import { Compras } from 'src/app/models/Compras';
 import { Credito } from 'src/app/models/Credito';
 import { CreditoPut } from 'src/app/models/CreditoPut';
@@ -16,9 +17,10 @@ export class FaturaComponent implements OnInit {
 
   item: CreditoPut = new CreditoPut();
   itemId:string = '';
-  filtroData: Date = new Date();
+  filtroData: string = '';
   // comprasFiltradas: Compras[] = [];
 
+  buy: Compras = new Compras();
   buys:Compras[] = []
   buysFiltered:Compras[] = [];
 
@@ -28,6 +30,21 @@ export class FaturaComponent implements OnInit {
   credit: Credito = new Credito();
   credits: Credito[] = [ ];
   displayedColumns = [ 'date' , 'estabelecimento', 'categoria', 'valor'];
+
+  public items: Array<any> = [{
+    date: this.buy.date,
+    categoria: this.buy.categoria,
+    estabelecimento: this.buy.estabelecimento,
+    valor: this.buy.valor,
+  }]
+
+  readonly columns: Array<PoTableColumn> = [
+    {property: 'date', label: 'DATA', },
+    {property: 'categoria',label: 'CATEGORIA', },
+    {property: 'estabelecimento',label: 'ESTABELECIMENTO', },
+    {property: 'valor',label: 'VALOR', },
+    // {property: 'this.actions' ,label: 'ACOES', }
+  ]
 
   dadosRecebidos: any;
 
@@ -55,41 +72,50 @@ export class FaturaComponent implements OnInit {
     console.log(this.dadosRecebidos)
       console.log(id)
     this.service.getCreditByCard(id).subscribe(retorno => {
-      this.buys = retorno
-      this.buysFiltered = this.buys; // Atualiza a lista de compras filtradas
+      this.items = retorno
+      this.buysFiltered = this.items; // Atualiza a lista de compras filtradas
       console.log(this.buysFiltered)
   }, err => { console.log(err) });
 
   }
 
-  formatarData(event: any) {
-    const dataSelecionada = event.target.value;
-    const [ano, mes] = dataSelecionada.split('-');
-    this.filtroData = new Date(parseInt(ano), parseInt(mes) - 1, 1);
+  // formatarData(event: any) {
+  //   console.log(event)
+  //   const selectDate = new Date(event)
+  //   const formaterDate = selectDate.toLocaleDateString('pt-BR', {year: 'numeric', month: 'numeric'})
+  //   console.log(formaterDate)
+  //   const dataSelecionada = formaterDate
+  //   console.log(dataSelecionada)
+  //   const [ano, mes] = dataSelecionada.split('-');
+  //   this.filtroData = dataSelecionada
+  //   // this.filtroData = new Date(parseInt(ano), parseInt(mes) - 1, 1);
+  //   console.log(this.filtroData)
+  //   // this.filtrarComprasPorData()
+  // }
 
-    this.filtrarComprasPorData()
+  filtrarComprasPorData(event: any): void {
+    if (event) {
+      console.log(event);
+      // Convertendo a data do evento para o mesmo formato 'mm/yyyy'
+      const dataEventoArray = event.split('/'); // Convertendo a data do evento para um array de strings ["dd", "mm", "yyyy"]
+      const dataEventoFormatada = `${dataEventoArray[1]}/${dataEventoArray[2]}`; // Montando a data do evento no formato 'mm/yyyy'
+      console.log(dataEventoFormatada);
+
+      // Filtrando as compras com base na data do evento
+      this.buysFiltered = this.items.filter(compra => {
+        // Convertendo a data da compra para o mesmo formato 'mm/yyyy'
+        const dataCompraArray = compra.date.split(' ')[0].split('/'); // Convertendo a data da compra para um array de strings ["dd", "mm", "yyyy"]
+        const dataCompraFormatada = `${dataCompraArray[1]}/${dataCompraArray[2]}`; // Montando a data da compra no formato 'mm/yyyy'
+
+        // Comparando a data da compra com a data do evento
+        return dataCompraFormatada === dataEventoFormatada;
+      });
+    } else {
+      // Se não houver uma data de filtro válida, exiba todas as compras
+      this.buysFiltered = this.items;
+    }
   }
 
-  filtrarComprasPorData(): void {
-    if (this.filtroData) {
-        // Convertendo this.filtroData para uma string no formato 'yyyy-mm'
-        const ano = this.filtroData.getFullYear();
-        const mes = ('0' + (this.filtroData.getMonth() + 1)).slice(-2); // Obtém o mês com zero à esquerda, se necessário
-        const dataFormatada = `${ano}-${mes}`;
-
-        // Filtrar as compras com base na data formatada
-        this.buysFiltered = this.buys.filter(compra => {
-            // Convertendo a data da compra para o mesmo formato 'yyyy-mm'
-            const dataCompraArray = compra.date.split(' ')[0].split('/'); // Convertendo a data da compra para um array de strings ["dd", "mm", "yyyy"]
-            const dataCompraFormatada = `${dataCompraArray[2]}-${dataCompraArray[1]}`; // Montando a data da compra no formato 'yyyy-mm'
-
-            return dataCompraFormatada === dataFormatada;
-        });
-    } else {
-        // Se não houver uma data de filtro válida, exiba todas as compras
-        this.buysFiltered = this.buys;
-    }
-}
 
 
 

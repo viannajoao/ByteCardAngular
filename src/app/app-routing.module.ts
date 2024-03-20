@@ -9,43 +9,46 @@ import { ComprasComponent } from './components/compras/compras.component';
 import { ComprasCadastroComponent } from './components/compras-cadastro/compras-cadastro.component';
 import { RelatorioGastoComponent } from './components/relatorio-gasto/relatorio-gasto.component';
 import { RelatorioComponent } from './components/relatorio/relatorio.component';
+import { PoPageDynamicEditComponent } from '@po-ui/ng-templates';
+import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
-
+  { path: '', redirectTo: '/main', pathMatch: 'full' },
   {
-    path: 'cadastrar',
+    path: 'main/cadastrar', canActivate: [AuthGuard],
     component: CadastroComponent
   },
   {
-    path: '',
-    component: MainComponent
+    path: 'main', canActivate: [AuthGuard],
+    component: MainComponent,
   },
   {
-    path: 'cartoes',
+    path: 'cartoes', canActivate: [AuthGuard],
     component: CartoesComponent
   },
   {
-    path: 'cartoes/cadastrarCartao',
+    path: 'cartoes/cadastrarCartao', canActivate: [AuthGuard],
     component: CadastroCartaoComponent
   },
   {
-    path: 'cartoes/faturas/:id',
+    path: 'cartoes/faturas/:id', canActivate: [AuthGuard],
     component: FaturaComponent
   },
   {
-    path: 'compras',
+    path: 'compras', canActivate: [AuthGuard],
     component: ComprasComponent
   },
   {
-    path: 'compras/cadastrarCompras',
+    path: 'compras/cadastrarCompras', canActivate: [AuthGuard],
     component: ComprasCadastroComponent
   },
   {
-    path: 'compras/relatorioGastos',
+    path: 'compras/relatorioGastos', canActivate: [AuthGuard],
     component: RelatorioGastoComponent
   },
   {
-    path: 'relatorios',
+    path: 'relatorios', canActivate: [AuthGuard],
     component: RelatorioComponent
   },
 ];

@@ -1,57 +1,8 @@
-<div class="inputClient">
-  <button mat-raised-button color="primary" routerLink="cadastrarCartao">Cadastrar novo Cartão</button>
-  <h1 class="title">Listagem de Cartões</h1>
-</div>
 
-<div class="search-container">
-  <form class="example-form" (ngSubmit)="pesquisar()">
-    <mat-form-field  t-form-field class="example-full-width">
-      <mat-label>Cliente</mat-label>
-      <input matInput placeholder="Ex. João" value="Dennis" [(ngModel)]="termoPesquisa" name="termoPesquisa" >
-    </mat-form-field>
-    <button mat-raised-button type="submit">Pesquisar</button>
-</form>
-</div>
+<po-page-list p-title="Lista de Cartoes" [p-actions]="addCredit">
+  <po-input class="po-field-medium" p-label="Buscar" p-placeholder="Jasmini" p-icon="po-icon po-icon-search" name="termoPesquisa" [(ngModel)]="termoPesquisa" (ngModelChange)="pesquisar()" p-clean="true" ></po-input>
+<po-table [p-items]="creditsFiltered" p-container="true" [p-sort]="true" [p-striped]="true" [p-height]="500" [p-infinite-scroll]="true" [p-columns]="columns"
+[p-hide-detail]="true" [p-actions]="actions">
 
-
-  <table mat-table [dataSource]="creditsFiltered" class="mat-elevation-z8">
-
-    <ng-container matColumnDef="numero">
-      <th mat-header-cell *matHeaderCellDef> Numero </th>
-      <td mat-cell *matCellDef="let c"> {{c.numCartao}} </td>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="cliente">
-      <th mat-header-cell *matHeaderCellDef> Cliente </th>
-      <td mat-cell *matCellDef="let c"> {{c.client}} </td>
-    </ng-container>
-
-    <!-- Weight Column -->
-    <ng-container matColumnDef="limite">
-      <th mat-header-cell *matHeaderCellDef> LIMITE </th>
-      <td mat-cell *matCellDef="let c"> {{c.limity}} </td>
-    </ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="validade">
-      <th mat-header-cell *matHeaderCellDef> VALIDADE </th>
-      <td mat-cell *matCellDef="let c"> {{c.validade}} </td>
-    </ng-container>
-
-
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef> AÇÕES </th>
-      <td mat-cell *matCellDef="let c; index as i">
-        <button mat-raised-button (click)="openDialog(i)">Alterar</button>
-        <button mat-raised-button (click)="openDialogDelete(i)" color="accent">excluir</button>
-        <button mat-raised-button color="primary" (click)="fatura(i)">Ver fatura</button>
-      </td>
-    </ng-container>
-
-
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-
+</po-table>
+</po-page-list>

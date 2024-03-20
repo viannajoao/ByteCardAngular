@@ -1,2 +1,10 @@
-<app-navbar></app-navbar>
-<router-outlet></router-outlet>
+
+<app-login *ngIf="authService.isAuthenticated() === false"></app-login>
+<div class="po-wrapper" >
+  <po-toolbar p-title="SoftBank" *ngIf="authService.isAuthenticated()"></po-toolbar>
+
+  <po-menu [p-menus]="menus" [p-filter]="true" p-logo="../assets/logo.png" *ngIf="authService.isAuthenticated()"></po-menu>
+
+  <router-outlet *ngIf="authService.isAuthenticated()"></router-outlet>
+</div>
+

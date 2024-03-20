@@ -1,11 +1,10 @@
-<h1>Faturas</h1>
+<!-- <h1>Faturas</h1>
 
 <form class="container-form" (ngSubmit)="formatarData($event)">
   <mat-card>
       <p><b>CPF:  </b>{{dadosRecebidos.numCartao}}</p>
       <p><b>CLIENTE:  </b>{{dadosRecebidos.client}}</p>
-      <!-- <p><b>LIMITE:  </b>{{data.limity}}</p>
-      <p><b>VALIDADE:  </b>{{data.validade}}</p> -->
+
       <mat-form-field appearance="fill">
 
         <mat-label>Data</mat-label>
@@ -16,8 +15,8 @@
       <button mat-raised-button color="primary" type="submit">Visualizar</button>
 
   </mat-card>
-
-
+</form> -->
+<!--
   <table mat-table [dataSource]="buysFiltered" class="mat-elevation-z8">
 
     <ng-container matColumnDef="date">
@@ -25,19 +24,19 @@
       <td mat-cell *matCellDef="let b">{{b.date}}</td>
     </ng-container>
 
-    <!-- Name Column -->
+
     <ng-container matColumnDef="estabelecimento">
       <th mat-header-cell *matHeaderCellDef> ESTABELECIMENTO </th>
       <td mat-cell *matCellDef="let b"> {{b.estabelecimento}} </td>
     </ng-container>
 
-    <!-- Weight Column -->
+
     <ng-container matColumnDef="categoria">
       <th mat-header-cell *matHeaderCellDef> CATEGORIA </th>
       <td mat-cell *matCellDef="let b"> {{b.categoria}} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
+
     <ng-container matColumnDef="valor">
       <th mat-header-cell *matHeaderCellDef> VALOR </th>
       <td mat-cell *matCellDef="let b"> {{"R$ " + b.valor}} </td>
@@ -45,6 +44,12 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+  </table> -->
 
-</form>
+<po-page-list p-title="Faturas">
+  <po-datepicker name="filtroData" (p-change)="filtrarComprasPorData($event)"></po-datepicker>
+  <p><b>CARTAO:  </b>{{dadosRecebidos.numCartao}}</p>
+  <p><b>CLIENTE:  </b>{{dadosRecebidos.client}}</p>
+    <po-table [p-items]="buysFiltered"   p-container="true" [p-sort]="true" [p-striped]="true" [p-height]="600" [p-infinite-scroll]="true" [p-columns]="columns"
+    [p-hide-detail]="true"></po-table>
+</po-page-list>
