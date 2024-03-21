@@ -5,10 +5,12 @@
   justify-content: center;
   align-items: center;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 table{
   width: 500px;
+  /* display: block; */
 }
 
 #compras{
