@@ -1,3 +1,18 @@
 table{
   width: 100%;
 }
+
+.info{
+  display: flex;
+  /* justify-content: space-around; */
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.info p{
+  margin-left: 10px;
+}
+
+h2{
+  text-align: center;
+}

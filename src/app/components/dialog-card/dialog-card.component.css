@@ -1,0 +1,7 @@
+:host ::ng-deep .po-page-content{
+  height: 300px !important;
+}
+
+:host ::ng-deep .po-field-title{
+  margin-top: 20px !important;
+}

@@ -1,5 +1,5 @@
 <h1>Alterar Limite</h1>
-
+<po-page-edit (p-save)="atualizar" (p-cancel)="cancel()">
 <form class="container-form" (ngSubmit)="atualizar()">
   <mat-card>
       <p><b>NUMERO:  </b>{{data.numCartao}}</p>
@@ -11,9 +11,11 @@
   <!-- {{data.numCartao}}
   {{data.validade}} -->
 
-  <mat-form-field>
+  <!-- <mat-form-field>
     <mat-label>Limite</mat-label>
   <input matInput type="text" [value]="data.limity" placeholder="Ex. 1500" name="limty"  [(ngModel)]="credit.limity">
-  </mat-form-field>
-
+  </mat-form-field> -->
+  <po-input name="limity" p-label="LIMITE" p-placeholder="Ex. 1500" p-required [(ngModel)]="credit.limity"></po-input>
+  <!-- <po-button (p-click)="atualizar()" p-label="Alterar" >Alterar</po-button> -->
 </form>
+</po-page-edit>

@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Client } from 'src/app/models/Client';
 import { ClientService } from 'src/app/servico/client.service';
 
+
 @Component({
   selector: 'app-dialod-delete',
   templateUrl: './dialod-delete.component.html',
@@ -16,7 +17,7 @@ export class DialodDeleteComponent implements OnInit {
   item: Client = new Client();
   itemId: string = '';
 
-  constructor(private dialog: MatDialogRef<DialodDeleteComponent>, private service: ClientService, @Inject(MAT_DIALOG_DATA) public data: Client, private snackBar: MatSnackBar ) {}
+  constructor(private dialog: MatDialogRef<DialodDeleteComponent>, private service: ClientService, @Inject(MAT_DIALOG_DATA) public data: Client, private snackBar: MatSnackBar,) {}
 
   ngOnInit(): void {
     this.itemId = this.data.id; // Substitua pelo ID do item que você deseja atualizar
@@ -28,12 +29,19 @@ export class DialodDeleteComponent implements OnInit {
     // console.log(this.itemId)
   }
 
+  // selecionar():void{
+  //   this.service.selecionar().subscribe(result => {
+  //     this.main.clientsFiltered = result
+  //   })
+  // }
+
   deleteItem(): void {
     console.log(this.item)
     this.service.deleteItem(this.item).subscribe(result => {
       console.log(result)
       this.onSucess()
       this.cancel()
+      // this.selecionar()
     })
   }
 

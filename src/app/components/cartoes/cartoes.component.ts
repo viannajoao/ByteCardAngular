@@ -104,7 +104,7 @@ export class CartoesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
+      this.selecionarCard()
     })
   }
 
@@ -119,7 +119,7 @@ export class CartoesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
+      this.selecionarCard()
     })
   }
 

@@ -11,17 +11,17 @@ import { Compras } from '../models/Compras';
 })
 export class ClientService {
 
-  private url:string = 'http://localhost:8080';
-  private urlPost:string = 'http://localhost:8080/cadastrar';
-  private urlCartoes:string = 'http://localhost:8080/cartoes';
-  private urlPostCard:string = 'http://localhost:8080/cadastrarCartoes';
-  private urlPostBuy:string = 'http://localhost:8080/compras/cadastrarCompras';
-  private urlFatura:string = 'http://localhost:8080/cartoes/faturas'
-  private urlRelatorio:string = 'http://localhost:8080/relatorios';
-  private urlRelatoioGastos: string = 'http://localhost:8080/relatorios/maisgastaram';
-  private urlRelatorioNotBuy:string = 'http://localhost:8080/relatorios/clientsNotBuy'
-  private urlLogin:string = 'http://localhost:8080/auth/login';
-  private urlClientsFiltered: string = 'http://localhost:8080/cartoes/cadastrarCartao';
+  private url:string = 'https://softbank-backend.azurewebsites.net';
+  private urlPost:string = 'https://softbank-backend.azurewebsites.net/cadastrar';
+  private urlCartoes:string = 'https://softbank-backend.azurewebsites.net/cartoes';
+  private urlPostCard:string = 'https://softbank-backend.azurewebsites.net/cadastrarCartoes';
+  private urlPostBuy:string = 'https://softbank-backend.azurewebsites.net/compras/cadastrarCompras';
+  private urlFatura:string = 'https://softbank-backend.azurewebsites.net/cartoes/faturas'
+  private urlRelatorio:string = 'https://softbank-backend.azurewebsites.net/relatorios';
+  private urlRelatoioGastos: string = 'https://softbank-backend.azurewebsites.net/relatorios/maisgastaram';
+  private urlRelatorioNotBuy:string = 'https://softbank-backend.azurewebsites.net/relatorios/clientsNotBuy'
+  private urlLogin:string = 'https://softbank-backend.azurewebsites.net/auth/login';
+  private urlClientsFiltered: string = 'https://softbank-backend.azurewebsites.net/cartoes/cadastrarCartao';
 
 
   constructor(private http:HttpClient) { }

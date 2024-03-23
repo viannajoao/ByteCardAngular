@@ -26,8 +26,8 @@ export class AppComponent {
       {label: 'Cadastrar Cartao', link: '/cartoes/cadastrarCartao'}
     ]},
     { label: 'Compras', subItems: [
-      {label: 'Cadastrar Compras', link: '/compras/cadastrarCompras'},
-      {label: 'Relatorio de gastos', link: '/compras/relatorioGastos'}
+      {label: 'Cadastrar Compras', link: '/cadastrarCompras'},
+      {label: 'Relatorio de gastos', link: '/relatorioGastos'}
     ]},
     { label: 'Relatorios', action: this.onRelatorios.bind(this)},
     { label: 'Logout', action: this.onLogout.bind(this)},

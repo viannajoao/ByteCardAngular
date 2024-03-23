@@ -37,11 +37,11 @@ const routes: Routes = [
   },
 
   {
-    path: 'compras/cadastrarCompras', canActivate: [AuthGuard],
+    path: 'cadastrarCompras', canActivate: [AuthGuard],
     component: ComprasCadastroComponent
   },
   {
-    path: 'compras/relatorioGastos', canActivate: [AuthGuard],
+    path: 'relatorioGastos', canActivate: [AuthGuard],
     component: RelatorioGastoComponent
   },
   {

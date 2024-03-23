@@ -96,7 +96,7 @@ export class MainComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
+      this.selecionar()
     })
   }
 
@@ -110,7 +110,7 @@ export class MainComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
+      this.selecionar()
     })
   }
 

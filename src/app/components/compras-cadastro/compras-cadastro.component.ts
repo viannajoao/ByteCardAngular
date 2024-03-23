@@ -66,36 +66,49 @@ export class ComprasCadastroComponent implements OnInit {
   cadastrar():void{
     this.buy.cartao = this.selectCredit.numCartao
     this.buy.credits_id = this.selectCredit
-    this.service.cadastrarBuy(this.buy).subscribe(retorno => {
+    if(this.buy.categoria && this.buy.estabelecimento && this.buy.valor && this.buy.cartao != '' ){
+    this.service.cadastrarBuy(this.buy).subscribe(
+      (retorno) =>{
       this.buys.push(retorno)
       this.onSucess();
       console.log(this.buys)
       this.buy = new Compras();
-    }, err => {
-      if(err.status === 403){
+    }, error => {
+      if(error.status === 403){
         this.onToken();
-      }else if(err.status === 200){
+      }else if(error.status === 200){
         this.onSucess()
+        this.buy = new Compras();
+      }else if(error.status === 400){
+        this.onLimity()
       }
-      this.onError();
     })
+  }else{
+    this.onError()
+  }
   }
 
   onSucess():void{
-    this.snackBar.open("Cartao cadastrado com sucesso", '', {
+    this.snackBar.open("Compra cadastrada com sucesso", '', {
       duration: 3000
     })
   }
 
   onError():void{
-    this.snackBar.open("Erro ao cadastrar", '', {
-      duration: 3000
+    this.snackBar.open("Erro ao cadastrar, preencha todos os campos", '', {
+      duration: 5000
     })
   }
 
   onToken(){
-    this.snackBar.open('Usuário sem permissao ou CPF invalido', '', {
-      duration: 3000
+    this.snackBar.open('Usuário sem permissao ou valor acima do limite', '', {
+      duration: 5000
+    })
+  }
+
+  onLimity(){
+    this.snackBar.open('valor acima do limite ou limite excedido para essa compra', '', {
+      duration: 5000
     })
   }
 

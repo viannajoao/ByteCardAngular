@@ -47,14 +47,17 @@ export class FaturaComponent implements OnInit {
   ]
 
   dadosRecebidos: any;
+  somaTotal: number = 0;
 
-  constructor(private service:ClientService, private snackBar: MatSnackBar, private route: ActivatedRoute) { }
+  constructor(private service:ClientService, private snackBar: MatSnackBar, private route: ActivatedRoute) {
+    // this.calcularSoma()
+   }
 
   async ngOnInit(): Promise<void> {
 
     this.route.params.subscribe(async params => {
 
-      console.log(params)
+      // console.log(params)
       if (params['id']) {
 
      const search = await this.service.getCreditById(params['id']).subscribe(async credit => {
@@ -75,6 +78,7 @@ export class FaturaComponent implements OnInit {
       this.items = retorno
       this.buysFiltered = this.items; // Atualiza a lista de compras filtradas
       console.log(this.buysFiltered)
+      this.calcularSoma(this.buysFiltered)
   }, err => { console.log(err) });
 
   }
@@ -114,6 +118,12 @@ export class FaturaComponent implements OnInit {
       // Se não houver uma data de filtro válida, exiba todas as compras
       this.buysFiltered = this.items;
     }
+  }
+
+  calcularSoma(params:any){
+    console.log(params)
+    this.somaTotal = params.reduce((total: any, item: any) => total + item.valor, 0)
+    console.log(this.somaTotal)
   }
 
 
