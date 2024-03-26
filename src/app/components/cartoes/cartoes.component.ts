@@ -35,7 +35,7 @@ export class CartoesComponent implements OnInit {
   dadosSelect: CreditoPut = new CreditoPut();
 
   public addCredit: Array<any> = [
-    {label: 'Adicionar Cartao', action: this.onAddCredit.bind(this), icon: 'po-icon-user-add', color: 'yellow'},
+    {label: 'Adicionar Cartão', action: this.onAddCredit.bind(this), icon: 'po-icon-user-add', color: 'yellow'},
   ]
 
   pesquisar() {
@@ -48,7 +48,7 @@ export class CartoesComponent implements OnInit {
 
 
   readonly columns: Array<PoTableColumn> = [
-    {property: 'numCartao',label: 'CARTAO', },
+    {property: 'numCartao',label: 'CARTÃO', },
     {property: 'client',label: 'CLIENTE', },
     {property: 'limity',label: 'LIMITE', },
     {property: 'validade',label: 'VALIDADE', },
@@ -56,7 +56,7 @@ export class CartoesComponent implements OnInit {
   ]
 
   public actions: Array<PoTableAction> = [
-    {label: 'Delete', action: this.openDialogDelete.bind(this)},
+    {label: 'Deletar', action: this.openDialogDelete.bind(this)},
     {label: 'Editar', action: this.openDialog.bind(this)},
     {label: 'Fatura', action: this.fatura.bind(this)},
   ]

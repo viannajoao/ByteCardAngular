@@ -36,13 +36,21 @@ export class DialogDeleteCardComponent implements OnInit {
 
   deleteItem(): void {
     console.log(this.item)
-    this.service.deleteCreditItem(this.item).subscribe(result => {
+    this.service.deleteCreditItem(this.item).subscribe(
+      (result) => {
       console.log(result)
       this.onSucess()
       this.cancel()
 
+  }, error => {
+    if(error.status === 403){
+      this.onCompra();
+    }else if(error.status == 200){
+      this.onSucess()
+    }
   }
   )}
+
 
   onSucess():void{
     this.snackBar.open("Cartão deletado com sucesso", '', {
@@ -53,6 +61,10 @@ export class DialogDeleteCardComponent implements OnInit {
 
   cancel():void{
     this.dialog.close();
+  }
+
+  onCompra(): void{
+    this.snackBar.open("Compra vinculada a esse cartão, débito em aberto")
   }
 
 

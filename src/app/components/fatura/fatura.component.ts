@@ -114,15 +114,18 @@ export class FaturaComponent implements OnInit {
         // Comparando a data da compra com a data do evento
         return dataCompraFormatada === dataEventoFormatada;
       });
+
+      this.calcularSoma(this.buysFiltered)
     } else {
       // Se não houver uma data de filtro válida, exiba todas as compras
       this.buysFiltered = this.items;
+      this.calcularSoma(this.items)
     }
   }
 
-  calcularSoma(params:any){
-    console.log(params)
-    this.somaTotal = params.reduce((total: any, item: any) => total + item.valor, 0)
+  calcularSoma(items:any[]): void{
+    console.log(items)
+    this.somaTotal = items.reduce((total: any, item: any) => total + item.valor, 0)
     console.log(this.somaTotal)
   }
 

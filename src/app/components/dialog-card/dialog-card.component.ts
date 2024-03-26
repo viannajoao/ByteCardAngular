@@ -45,12 +45,22 @@ export class DialogCardComponent implements OnInit {
     this.item.limity = this.credit.limity
 
     console.log(this.item)
-    this.service.updateCreditItem(this.item).subscribe(data => {
+    this.service.updateCreditItem(this.item).subscribe(
+      (data) => {
       console.log(data)
       this.onSucess()
       this.client = new Client()
       this.cancel()
 
+    }, error => {
+      if(error.status == 400){
+        this.onError();
+      }else if(error.status == 200) {
+        this.onSucess()
+        this.cancel()
+      }else if(error.status == 403){
+        this.onLimite()
+      }
     })
 
 
@@ -58,7 +68,7 @@ export class DialogCardComponent implements OnInit {
 
   onSucess():void{
     this.snackBar.open("Limite do cliente modificado", '', {
-      duration: 3000
+      duration: 7000
     })
   }
 
@@ -66,5 +76,16 @@ export class DialogCardComponent implements OnInit {
     this.dialog.close()
   }
 
+  onError():void{
+    this.snackBar.open("Limite menor do que o atual", '', {
+      duration: 7000
+    })
+  }
+
+  onLimite():void{
+    this.snackBar.open("Usuario sem permissão ou limite menor do que o atual", '', {
+      duration: 7000
+    })
+  }
 
 }

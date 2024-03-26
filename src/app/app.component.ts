@@ -21,9 +21,9 @@ export class AppComponent {
       {label: 'Listas de Clientes', link: '/'},
       {label: 'Cadastrar Clientes', link: '/main/cadastrar'}
     ]},
-    { label: 'Cartoes', subItems: [
-      {label: 'Listas de Cartoes', link: '/cartoes'},
-      {label: 'Cadastrar Cartao', link: '/cartoes/cadastrarCartao'}
+    { label: 'Cartões', subItems: [
+      {label: 'Listas de Cartões', link: '/cartoes'},
+      {label: 'Cadastrar Cartão', link: '/cartoes/cadastrarCartao'}
     ]},
     { label: 'Compras', subItems: [
       {label: 'Cadastrar Compras', link: '/cadastrarCompras'},
@@ -55,7 +55,7 @@ export class AppComponent {
   }
 
   private onLogout(){
-    this.snackBar.open("Logout feito com sucesso", ""  , {duration:2000});
+    this.snackBar.open("Logout feito com sucesso", ""  , {duration:5000});
     localStorage.removeItem('token');
   }
 
