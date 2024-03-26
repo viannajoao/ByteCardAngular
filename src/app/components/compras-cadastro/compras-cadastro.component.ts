@@ -26,8 +26,8 @@ export class ComprasCadastroComponent implements OnInit {
 
   public readonly category: Array<PoSelectOption> = [
     { label: 'Lazer', value: 'Lazer' },
-    { label: 'Saude', value: 'Saude' },
-    { label: 'Alimentacao', value: 'Alimentacao' },
+    { label: 'Saúde', value: 'Saude' },
+    { label: 'Alimentação', value: 'Alimentacao' },
     { label: 'Viagem', value: 'Viagem' },
     { label: 'PetShop', value: 'PetShop' },
   ];
