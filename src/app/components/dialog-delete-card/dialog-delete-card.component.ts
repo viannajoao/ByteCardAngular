@@ -64,7 +64,9 @@ export class DialogDeleteCardComponent implements OnInit {
   }
 
   onCompra(): void{
-    this.snackBar.open("Compra vinculada a esse cartão, débito em aberto")
+    this.snackBar.open("Compra vinculada a esse cartão, débito em aberto", '', {
+      duration: 7000
+    })
   }
 
 
